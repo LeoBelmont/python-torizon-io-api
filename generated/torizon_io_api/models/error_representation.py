@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,7 +30,7 @@ class ErrorRepresentation(BaseModel):
     code: StrictStr
     description: StrictStr
     cause: Optional[Any] = None
-    error_id: Optional[StrictStr] = Field(default=None, alias="errorId")
+    error_id: Optional[UUID] = Field(default=None, alias="errorId")
     __properties: ClassVar[List[str]] = ["code", "description", "cause", "errorId"]
 
     model_config = ConfigDict(
@@ -71,6 +72,9 @@ class ErrorRepresentation(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of cause
+        if self.cause:
+            _dict['cause'] = self.cause.to_dict()
         # set to None if cause (nullable) is None
         # and model_fields_set contains the field
         if self.cause is None and "cause" in self.model_fields_set:
@@ -95,7 +99,7 @@ class ErrorRepresentation(BaseModel):
         _obj = cls.model_validate({
             "code": obj.get("code"),
             "description": obj.get("description"),
-            "cause": obj.get("cause"),
+            "cause": AnyOf.from_dict(obj["cause"]) if obj.get("cause") is not None else None,
             "errorId": obj.get("errorId")
         })
         return _obj

@@ -36,7 +36,7 @@
                 "-g", "python",
                 "-o", "/local/generated",
                 "--additional-properties", "packageName=torizon_io_api",
-                "--additional-properties", "packageVersion=0.0.2",
+                "--additional-properties", "packageVersion=0.0.3",
                 "--additional-properties", "projectName=torizon-io-api"
             ],
             "problemMatcher": [

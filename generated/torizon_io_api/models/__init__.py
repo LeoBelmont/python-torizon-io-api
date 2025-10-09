@@ -12,20 +12,25 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 # import models into model package
 from torizon_io_api.models.bad_request_repr import BadRequestRepr
 from torizon_io_api.models.client_signature import ClientSignature
 from torizon_io_api.models.conflict_repr import ConflictRepr
 from torizon_io_api.models.create_fleet import CreateFleet
 from torizon_io_api.models.create_lockbox_request import CreateLockboxRequest
+from torizon_io_api.models.create_session_request import CreateSessionRequest
 from torizon_io_api.models.custom_update_data import CustomUpdateData
 from torizon_io_api.models.delegation_info import DelegationInfo
+from torizon_io_api.models.detailed_metric_query import DetailedMetricQuery
 from torizon_io_api.models.device_create_req import DeviceCreateReq
+from torizon_io_api.models.device_id import DeviceId
+from torizon_io_api.models.device_info import DeviceInfo
 from torizon_io_api.models.device_info_basic import DeviceInfoBasic
 from torizon_io_api.models.device_info_extended import DeviceInfoExtended
-from torizon_io_api.models.device_package import DevicePackage
+from torizon_io_api.models.device_name_request import DeviceNameRequest
+from torizon_io_api.models.device_notes_request import DeviceNotesRequest
 from torizon_io_api.models.device_packages import DevicePackages
+from torizon_io_api.models.device_session import DeviceSession
 from torizon_io_api.models.device_sort import DeviceSort
 from torizon_io_api.models.device_sort_direction import DeviceSortDirection
 from torizon_io_api.models.device_status import DeviceStatus
@@ -36,15 +41,22 @@ from torizon_io_api.models.error_representation import ErrorRepresentation
 from torizon_io_api.models.external_package import ExternalPackage
 from torizon_io_api.models.file_info import FileInfo
 from torizon_io_api.models.fleet import Fleet
+from torizon_io_api.models.fleet_metrics_outliers_request import FleetMetricsOutliersRequest
+from torizon_io_api.models.fleet_metrics_outliers_response import FleetMetricsOutliersResponse
 from torizon_io_api.models.fleet_type import FleetType
 from torizon_io_api.models.image import Image
 from torizon_io_api.models.installed_package import InstalledPackage
+from torizon_io_api.models.ip_address_request import IpAddressRequest
 from torizon_io_api.models.json_signed_payload import JsonSignedPayload
+from torizon_io_api.models.key_data import KeyData
+from torizon_io_api.models.last_ssh_session import LastSshSession
 from torizon_io_api.models.metrics_response import MetricsResponse
 from torizon_io_api.models.network_info import NetworkInfo
 from torizon_io_api.models.not_found_repr import NotFoundRepr
+from torizon_io_api.models.outlier import Outlier
+from torizon_io_api.models.outlier_aggregation_method import OutlierAggregationMethod
+from torizon_io_api.models.outlier_values import OutlierValues
 from torizon_io_api.models.package import Package
-from torizon_io_api.models.package_info import PackageInfo
 from torizon_io_api.models.pagination_result_device_info_basic import PaginationResultDeviceInfoBasic
 from torizon_io_api.models.pagination_result_device_packages import PaginationResultDevicePackages
 from torizon_io_api.models.pagination_result_external_package import PaginationResultExternalPackage
@@ -52,7 +64,10 @@ from torizon_io_api.models.pagination_result_fleet import PaginationResultFleet
 from torizon_io_api.models.pagination_result_network_info import PaginationResultNetworkInfo
 from torizon_io_api.models.pagination_result_package import PaginationResultPackage
 from torizon_io_api.models.pagination_result_string import PaginationResultString
+from torizon_io_api.models.pagination_result_update_response import PaginationResultUpdateResponse
+from torizon_io_api.models.post_updates400_response import PostUpdates400Response
 from torizon_io_api.models.provision_info import ProvisionInfo
+from torizon_io_api.models.public_keys import PublicKeys
 from torizon_io_api.models.queue_response import QueueResponse
 from torizon_io_api.models.range_not_satisfiable_repr import RangeNotSatisfiableRepr
 from torizon_io_api.models.series import Series
@@ -61,14 +76,17 @@ from torizon_io_api.models.signature_method import SignatureMethod
 from torizon_io_api.models.simple_device_info import SimpleDeviceInfo
 from torizon_io_api.models.simple_device_not_affected_info import SimpleDeviceNotAffectedInfo
 from torizon_io_api.models.sort_direction import SortDirection
+from torizon_io_api.models.ssh_session import SshSession
 from torizon_io_api.models.target_image import TargetImage
 from torizon_io_api.models.target_items_sort import TargetItemsSort
 from torizon_io_api.models.time_aggregation import TimeAggregation
 from torizon_io_api.models.time_aggregation_method import TimeAggregationMethod
-from torizon_io_api.models.tuple2_device_tag_id_device_tag_value import Tuple2DeviceTagIdDeviceTagValue
-from torizon_io_api.models.tuple2_long_option_double import Tuple2LongOptionDouble
 from torizon_io_api.models.update_create_result import UpdateCreateResult
 from torizon_io_api.models.update_fleet import UpdateFleet
 from torizon_io_api.models.update_hibernation_status_request import UpdateHibernationStatusRequest
 from torizon_io_api.models.update_request import UpdateRequest
+from torizon_io_api.models.update_response import UpdateResponse
 from torizon_io_api.models.upstream_endpoint_error_repr import UpstreamEndpointErrorRepr
+from torizon_io_api.models.user_info import UserInfo
+from torizon_io_api.models.user_session import UserSession
+

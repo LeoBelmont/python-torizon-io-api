@@ -19,6 +19,10 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
+from torizon_io_api.models.detailed_metric_query import DetailedMetricQuery
+from torizon_io_api.models.fleet_metrics_outliers_request import FleetMetricsOutliersRequest
+from torizon_io_api.models.fleet_metrics_outliers_response import FleetMetricsOutliersResponse
 from torizon_io_api.models.metrics_response import MetricsResponse
 from torizon_io_api.models.pagination_result_string import PaginationResultString
 
@@ -38,6 +42,360 @@ class DeviceMetricsApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+
+
+    @validate_call
+    def get_device_data_devices_deviceuuid_detailed_metrics(
+        self,
+        device_uuid: StrictStr,
+        metrics: Annotated[List[StrictStr], Field(min_length=1)],
+        var_from: StrictInt,
+        to: StrictInt,
+        raw_datapoints: Optional[StrictInt] = None,
+        total_buckets: Optional[StrictInt] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> MetricsResponse:
+        """Get detailed metrics data for a single device
+
+          This endpoint will return either a csv or json file of time-bucketed data as reported by the specified device.  Parameters:   * time - beginning of interval in Unix Epoch milliseconds * from - end of interval in Unix Epoch milliseconds * raw_datapoints - number of data points to return in response * total_buckets - number of time buckets to return in response  **Note:** One of raw_datapoints OR total_buckets must be specified in parameters       
+
+        :param device_uuid: (required)
+        :type device_uuid: str
+        :param metrics: (required)
+        :type metrics: List[str]
+        :param var_from: (required)
+        :type var_from: int
+        :param to: (required)
+        :type to: int
+        :param raw_datapoints:
+        :type raw_datapoints: int
+        :param total_buckets:
+        :type total_buckets: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_device_data_devices_deviceuuid_detailed_metrics_serialize(
+            device_uuid=device_uuid,
+            metrics=metrics,
+            var_from=var_from,
+            to=to,
+            raw_datapoints=raw_datapoints,
+            total_buckets=total_buckets,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "MetricsResponse",
+            '400': "PostUpdates400Response",
+            '416': "RangeNotSatisfiableRepr",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_device_data_devices_deviceuuid_detailed_metrics_with_http_info(
+        self,
+        device_uuid: StrictStr,
+        metrics: Annotated[List[StrictStr], Field(min_length=1)],
+        var_from: StrictInt,
+        to: StrictInt,
+        raw_datapoints: Optional[StrictInt] = None,
+        total_buckets: Optional[StrictInt] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[MetricsResponse]:
+        """Get detailed metrics data for a single device
+
+          This endpoint will return either a csv or json file of time-bucketed data as reported by the specified device.  Parameters:   * time - beginning of interval in Unix Epoch milliseconds * from - end of interval in Unix Epoch milliseconds * raw_datapoints - number of data points to return in response * total_buckets - number of time buckets to return in response  **Note:** One of raw_datapoints OR total_buckets must be specified in parameters       
+
+        :param device_uuid: (required)
+        :type device_uuid: str
+        :param metrics: (required)
+        :type metrics: List[str]
+        :param var_from: (required)
+        :type var_from: int
+        :param to: (required)
+        :type to: int
+        :param raw_datapoints:
+        :type raw_datapoints: int
+        :param total_buckets:
+        :type total_buckets: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_device_data_devices_deviceuuid_detailed_metrics_serialize(
+            device_uuid=device_uuid,
+            metrics=metrics,
+            var_from=var_from,
+            to=to,
+            raw_datapoints=raw_datapoints,
+            total_buckets=total_buckets,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "MetricsResponse",
+            '400': "PostUpdates400Response",
+            '416': "RangeNotSatisfiableRepr",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_device_data_devices_deviceuuid_detailed_metrics_without_preload_content(
+        self,
+        device_uuid: StrictStr,
+        metrics: Annotated[List[StrictStr], Field(min_length=1)],
+        var_from: StrictInt,
+        to: StrictInt,
+        raw_datapoints: Optional[StrictInt] = None,
+        total_buckets: Optional[StrictInt] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get detailed metrics data for a single device
+
+          This endpoint will return either a csv or json file of time-bucketed data as reported by the specified device.  Parameters:   * time - beginning of interval in Unix Epoch milliseconds * from - end of interval in Unix Epoch milliseconds * raw_datapoints - number of data points to return in response * total_buckets - number of time buckets to return in response  **Note:** One of raw_datapoints OR total_buckets must be specified in parameters       
+
+        :param device_uuid: (required)
+        :type device_uuid: str
+        :param metrics: (required)
+        :type metrics: List[str]
+        :param var_from: (required)
+        :type var_from: int
+        :param to: (required)
+        :type to: int
+        :param raw_datapoints:
+        :type raw_datapoints: int
+        :param total_buckets:
+        :type total_buckets: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_device_data_devices_deviceuuid_detailed_metrics_serialize(
+            device_uuid=device_uuid,
+            metrics=metrics,
+            var_from=var_from,
+            to=to,
+            raw_datapoints=raw_datapoints,
+            total_buckets=total_buckets,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "MetricsResponse",
+            '400': "PostUpdates400Response",
+            '416': "RangeNotSatisfiableRepr",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_device_data_devices_deviceuuid_detailed_metrics_serialize(
+        self,
+        device_uuid,
+        metrics,
+        var_from,
+        to,
+        raw_datapoints,
+        total_buckets,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+            'metrics': 'multi',
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if device_uuid is not None:
+            _path_params['deviceUuid'] = device_uuid
+        # process the query parameters
+        if metrics is not None:
+            
+            _query_params.append(('metrics', metrics))
+            
+        if var_from is not None:
+            
+            _query_params.append(('from', var_from))
+            
+        if to is not None:
+            
+            _query_params.append(('to', to))
+            
+        if raw_datapoints is not None:
+            
+            _query_params.append(('raw_datapoints', raw_datapoints))
+            
+        if total_buckets is not None:
+            
+            _query_params.append(('total_buckets', total_buckets))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    'text/csv'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'BearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/device-data/devices/{deviceUuid}/detailed-metrics',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
 
 
     @validate_call
@@ -111,7 +469,7 @@ class DeviceMetricsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MetricsResponse",
-            '400': "UpstreamEndpointErrorRepr",
+            '400': "PostUpdates400Response",
             '404': "NotFoundRepr",
             '416': "RangeNotSatisfiableRepr",
         }
@@ -197,7 +555,7 @@ class DeviceMetricsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MetricsResponse",
-            '400': "UpstreamEndpointErrorRepr",
+            '400': "PostUpdates400Response",
             '404': "NotFoundRepr",
             '416': "RangeNotSatisfiableRepr",
         }
@@ -283,7 +641,7 @@ class DeviceMetricsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MetricsResponse",
-            '400': "UpstreamEndpointErrorRepr",
+            '400': "PostUpdates400Response",
             '404': "NotFoundRepr",
             '416': "RangeNotSatisfiableRepr",
         }
@@ -382,7 +740,7 @@ class DeviceMetricsApi:
     @validate_call
     def get_device_data_fleets_fleetid_metrics(
         self,
-        fleet_id: StrictStr,
+        fleet_id: UUID,
         var_from: Annotated[int, Field(le=2147483647000, strict=True, ge=1000)],
         to: Annotated[int, Field(le=2147483647000, strict=True, ge=1000)],
         metric: Optional[List[StrictStr]] = None,
@@ -450,7 +808,7 @@ class DeviceMetricsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MetricsResponse",
-            '400': "UpstreamEndpointErrorRepr",
+            '400': "PostUpdates400Response",
             '416': "RangeNotSatisfiableRepr",
         }
         response_data = self.api_client.call_api(
@@ -467,7 +825,7 @@ class DeviceMetricsApi:
     @validate_call
     def get_device_data_fleets_fleetid_metrics_with_http_info(
         self,
-        fleet_id: StrictStr,
+        fleet_id: UUID,
         var_from: Annotated[int, Field(le=2147483647000, strict=True, ge=1000)],
         to: Annotated[int, Field(le=2147483647000, strict=True, ge=1000)],
         metric: Optional[List[StrictStr]] = None,
@@ -535,7 +893,7 @@ class DeviceMetricsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MetricsResponse",
-            '400': "UpstreamEndpointErrorRepr",
+            '400': "PostUpdates400Response",
             '416': "RangeNotSatisfiableRepr",
         }
         response_data = self.api_client.call_api(
@@ -552,7 +910,7 @@ class DeviceMetricsApi:
     @validate_call
     def get_device_data_fleets_fleetid_metrics_without_preload_content(
         self,
-        fleet_id: StrictStr,
+        fleet_id: UUID,
         var_from: Annotated[int, Field(le=2147483647000, strict=True, ge=1000)],
         to: Annotated[int, Field(le=2147483647000, strict=True, ge=1000)],
         metric: Optional[List[StrictStr]] = None,
@@ -620,7 +978,7 @@ class DeviceMetricsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MetricsResponse",
-            '400': "UpstreamEndpointErrorRepr",
+            '400': "PostUpdates400Response",
             '416': "RangeNotSatisfiableRepr",
         }
         response_data = self.api_client.call_api(
@@ -774,7 +1132,7 @@ class DeviceMetricsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaginationResultString",
-            '400': "UpstreamEndpointErrorRepr",
+            '400': "PostUpdates400Response",
             '404': "NotFoundRepr",
             '416': "RangeNotSatisfiableRepr",
         }
@@ -848,7 +1206,7 @@ class DeviceMetricsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaginationResultString",
-            '400': "UpstreamEndpointErrorRepr",
+            '400': "PostUpdates400Response",
             '404': "NotFoundRepr",
             '416': "RangeNotSatisfiableRepr",
         }
@@ -922,7 +1280,7 @@ class DeviceMetricsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaginationResultString",
-            '400': "UpstreamEndpointErrorRepr",
+            '400': "PostUpdates400Response",
             '404': "NotFoundRepr",
             '416': "RangeNotSatisfiableRepr",
         }
@@ -989,6 +1347,603 @@ class DeviceMetricsApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/device-data/metric-names',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def post_device_data_fleets_fleetid_metrics_outliers(
+        self,
+        fleet_id: UUID,
+        fleet_metrics_outliers_request: FleetMetricsOutliersRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> FleetMetricsOutliersResponse:
+        """Get fleet outlier metrics from a fleet of devices
+
+         Response will contain a list of outlier metrics for the provided fleet of devices  The Request Body contains several keys: * metrics - a list of metric names (max of 5) * from - unix timestamp (milliseconds since epoch) marking beginning of sample * to - unix timestamp (milliseconds since epoch) marking end of sample * aggregation - Optional whether the outliers are above or below the average. Min|Max (default Max) * limit - Optional Int limiting number of response values (maximum is 10)           
+
+        :param fleet_id: (required)
+        :type fleet_id: str
+        :param fleet_metrics_outliers_request: (required)
+        :type fleet_metrics_outliers_request: FleetMetricsOutliersRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._post_device_data_fleets_fleetid_metrics_outliers_serialize(
+            fleet_id=fleet_id,
+            fleet_metrics_outliers_request=fleet_metrics_outliers_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FleetMetricsOutliersResponse",
+            '400': "PostUpdates400Response",
+            '404': "NotFoundRepr",
+            '416': "RangeNotSatisfiableRepr",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def post_device_data_fleets_fleetid_metrics_outliers_with_http_info(
+        self,
+        fleet_id: UUID,
+        fleet_metrics_outliers_request: FleetMetricsOutliersRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[FleetMetricsOutliersResponse]:
+        """Get fleet outlier metrics from a fleet of devices
+
+         Response will contain a list of outlier metrics for the provided fleet of devices  The Request Body contains several keys: * metrics - a list of metric names (max of 5) * from - unix timestamp (milliseconds since epoch) marking beginning of sample * to - unix timestamp (milliseconds since epoch) marking end of sample * aggregation - Optional whether the outliers are above or below the average. Min|Max (default Max) * limit - Optional Int limiting number of response values (maximum is 10)           
+
+        :param fleet_id: (required)
+        :type fleet_id: str
+        :param fleet_metrics_outliers_request: (required)
+        :type fleet_metrics_outliers_request: FleetMetricsOutliersRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._post_device_data_fleets_fleetid_metrics_outliers_serialize(
+            fleet_id=fleet_id,
+            fleet_metrics_outliers_request=fleet_metrics_outliers_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FleetMetricsOutliersResponse",
+            '400': "PostUpdates400Response",
+            '404': "NotFoundRepr",
+            '416': "RangeNotSatisfiableRepr",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def post_device_data_fleets_fleetid_metrics_outliers_without_preload_content(
+        self,
+        fleet_id: UUID,
+        fleet_metrics_outliers_request: FleetMetricsOutliersRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get fleet outlier metrics from a fleet of devices
+
+         Response will contain a list of outlier metrics for the provided fleet of devices  The Request Body contains several keys: * metrics - a list of metric names (max of 5) * from - unix timestamp (milliseconds since epoch) marking beginning of sample * to - unix timestamp (milliseconds since epoch) marking end of sample * aggregation - Optional whether the outliers are above or below the average. Min|Max (default Max) * limit - Optional Int limiting number of response values (maximum is 10)           
+
+        :param fleet_id: (required)
+        :type fleet_id: str
+        :param fleet_metrics_outliers_request: (required)
+        :type fleet_metrics_outliers_request: FleetMetricsOutliersRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._post_device_data_fleets_fleetid_metrics_outliers_serialize(
+            fleet_id=fleet_id,
+            fleet_metrics_outliers_request=fleet_metrics_outliers_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FleetMetricsOutliersResponse",
+            '400': "PostUpdates400Response",
+            '404': "NotFoundRepr",
+            '416': "RangeNotSatisfiableRepr",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _post_device_data_fleets_fleetid_metrics_outliers_serialize(
+        self,
+        fleet_id,
+        fleet_metrics_outliers_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if fleet_id is not None:
+            _path_params['fleetId'] = fleet_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if fleet_metrics_outliers_request is not None:
+            _body_params = fleet_metrics_outliers_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'BearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/device-data/fleets/{fleetId}/metrics/outliers',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def post_device_data_fleets_fleetid_metrics_report(
+        self,
+        fleet_id: UUID,
+        detailed_metric_query: DetailedMetricQuery,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> MetricsResponse:
+        """Get metrics report for fleet of devices
+
+         Returns either a csv or json file of all the datapoints specified in the query  The query contains these keys:  * metrics - a list of metric names * from - unix timestamp (milliseconds since epoch) marking beginning of report * to - unix timestamp (milliseconds since epoch) marking end of report * datapointCount - Optional Int - the total number of datapoints to be included in the report * totalBuckets - Optional Int - the total number of buckets to be included in the report    **Note:** One of datapointCount OR totalBuckets must be specified           
+
+        :param fleet_id: (required)
+        :type fleet_id: str
+        :param detailed_metric_query: (required)
+        :type detailed_metric_query: DetailedMetricQuery
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._post_device_data_fleets_fleetid_metrics_report_serialize(
+            fleet_id=fleet_id,
+            detailed_metric_query=detailed_metric_query,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "MetricsResponse",
+            '400': "PostUpdates400Response",
+            '404': "NotFoundRepr",
+            '416': "RangeNotSatisfiableRepr",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def post_device_data_fleets_fleetid_metrics_report_with_http_info(
+        self,
+        fleet_id: UUID,
+        detailed_metric_query: DetailedMetricQuery,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[MetricsResponse]:
+        """Get metrics report for fleet of devices
+
+         Returns either a csv or json file of all the datapoints specified in the query  The query contains these keys:  * metrics - a list of metric names * from - unix timestamp (milliseconds since epoch) marking beginning of report * to - unix timestamp (milliseconds since epoch) marking end of report * datapointCount - Optional Int - the total number of datapoints to be included in the report * totalBuckets - Optional Int - the total number of buckets to be included in the report    **Note:** One of datapointCount OR totalBuckets must be specified           
+
+        :param fleet_id: (required)
+        :type fleet_id: str
+        :param detailed_metric_query: (required)
+        :type detailed_metric_query: DetailedMetricQuery
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._post_device_data_fleets_fleetid_metrics_report_serialize(
+            fleet_id=fleet_id,
+            detailed_metric_query=detailed_metric_query,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "MetricsResponse",
+            '400': "PostUpdates400Response",
+            '404': "NotFoundRepr",
+            '416': "RangeNotSatisfiableRepr",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def post_device_data_fleets_fleetid_metrics_report_without_preload_content(
+        self,
+        fleet_id: UUID,
+        detailed_metric_query: DetailedMetricQuery,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get metrics report for fleet of devices
+
+         Returns either a csv or json file of all the datapoints specified in the query  The query contains these keys:  * metrics - a list of metric names * from - unix timestamp (milliseconds since epoch) marking beginning of report * to - unix timestamp (milliseconds since epoch) marking end of report * datapointCount - Optional Int - the total number of datapoints to be included in the report * totalBuckets - Optional Int - the total number of buckets to be included in the report    **Note:** One of datapointCount OR totalBuckets must be specified           
+
+        :param fleet_id: (required)
+        :type fleet_id: str
+        :param detailed_metric_query: (required)
+        :type detailed_metric_query: DetailedMetricQuery
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._post_device_data_fleets_fleetid_metrics_report_serialize(
+            fleet_id=fleet_id,
+            detailed_metric_query=detailed_metric_query,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "MetricsResponse",
+            '400': "PostUpdates400Response",
+            '404': "NotFoundRepr",
+            '416': "RangeNotSatisfiableRepr",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _post_device_data_fleets_fleetid_metrics_report_serialize(
+        self,
+        fleet_id,
+        detailed_metric_query,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if fleet_id is not None:
+            _path_params['fleetId'] = fleet_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if detailed_metric_query is not None:
+            _body_params = detailed_metric_query
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    'text/csv'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'BearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/device-data/fleets/{fleetId}/metrics/report',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

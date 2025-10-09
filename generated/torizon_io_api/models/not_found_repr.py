@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,7 +31,7 @@ class NotFoundRepr(BaseModel):
     description: Optional[Any] = None
     code: StrictStr
     cause: Optional[Any] = None
-    error_id: Optional[StrictStr] = Field(default=None, alias="errorId")
+    error_id: Optional[UUID] = Field(default=None, alias="errorId")
     __properties: ClassVar[List[str]] = ["msg", "description", "code", "cause", "errorId"]
 
     model_config = ConfigDict(
@@ -72,6 +73,12 @@ class NotFoundRepr(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of description
+        if self.description:
+            _dict['description'] = self.description.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of cause
+        if self.cause:
+            _dict['cause'] = self.cause.to_dict()
         # set to None if description (nullable) is None
         # and model_fields_set contains the field
         if self.description is None and "description" in self.model_fields_set:
@@ -100,9 +107,9 @@ class NotFoundRepr(BaseModel):
 
         _obj = cls.model_validate({
             "msg": obj.get("msg"),
-            "description": obj.get("description"),
+            "description": AnyOf.from_dict(obj["description"]) if obj.get("description") is not None else None,
             "code": obj.get("code"),
-            "cause": obj.get("cause"),
+            "cause": AnyOf.from_dict(obj["cause"]) if obj.get("cause") is not None else None,
             "errorId": obj.get("errorId")
         })
         return _obj

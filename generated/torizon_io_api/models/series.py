@@ -20,7 +20,6 @@ import json
 from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from torizon_io_api.models.series_meta import SeriesMeta
-from torizon_io_api.models.tuple2_long_option_double import Tuple2LongOptionDouble
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,7 +29,7 @@ class Series(BaseModel):
     """ # noqa: E501
     name: StrictStr
     meta: SeriesMeta
-    points: Optional[List[Tuple2LongOptionDouble]] = None
+    points: Optional[List[List[Any]]] = None
     __properties: ClassVar[List[str]] = ["name", "meta", "points"]
 
     model_config = ConfigDict(
@@ -75,13 +74,6 @@ class Series(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of meta
         if self.meta:
             _dict['meta'] = self.meta.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in points (list)
-        _items = []
-        if self.points:
-            for _item_points in self.points:
-                if _item_points:
-                    _items.append(_item_points.to_dict())
-            _dict['points'] = _items
         return _dict
 
     @classmethod
@@ -96,7 +88,7 @@ class Series(BaseModel):
         _obj = cls.model_validate({
             "name": obj.get("name"),
             "meta": SeriesMeta.from_dict(obj["meta"]) if obj.get("meta") is not None else None,
-            "points": [Tuple2LongOptionDouble.from_dict(_item) for _item in obj["points"]] if obj.get("points") is not None else None
+            "points": obj.get("points")
         })
         return _obj
 

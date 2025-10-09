@@ -21,6 +21,8 @@ from pydantic import StrictBool, StrictBytes, StrictInt, StrictStr
 from typing import List, Optional, Tuple, Union
 from torizon_io_api.models.device_create_req import DeviceCreateReq
 from torizon_io_api.models.device_info_extended import DeviceInfoExtended
+from torizon_io_api.models.device_name_request import DeviceNameRequest
+from torizon_io_api.models.device_notes_request import DeviceNotesRequest
 from torizon_io_api.models.device_packages import DevicePackages
 from torizon_io_api.models.device_sort import DeviceSort
 from torizon_io_api.models.device_sort_direction import DeviceSortDirection
@@ -353,7 +355,7 @@ class DevicesApi:
     ) -> PaginationResultDeviceInfoBasic:
         """Query device information
 
-         Retrieves a list of devices in your repository. This endpoint has two different modes of operation.   * You can specify `deviceId`s and/or `deviceUuid`s any number of times as query parameters, and all devices matching those ids will be returned. * You can specify a number of different filter parameters, and only devices matching all of the filter parameters you specify will be returned. Available filter parameters:     * `nameContains`     * `hibernated`     * `status`     * `activatedAfter`     * `activatedBefore`     * `lastSeenStart`     * `lastSeenEnd`     * `createdAtStart`     * `createdAtEnd`         
+         Retrieves a list of devices in your repository. This endpoint has two different modes of operation.  * You can specify `deviceId`s and/or `deviceUuid`s any number of times as query parameters, and all devices matching those ids will be returned. * You can specify a number of different filter parameters, and only devices matching all of the filter parameters you specify will be returned. Available filter parameters:     * `nameContains`     * `hibernated`     * `status`     * `activatedAfter`     * `activatedBefore`     * `lastSeenStart`     * `lastSeenEnd`     * `createdAtStart`     * `createdAtEnd`         
 
         :param offset:
         :type offset: int
@@ -481,7 +483,7 @@ class DevicesApi:
     ) -> ApiResponse[PaginationResultDeviceInfoBasic]:
         """Query device information
 
-         Retrieves a list of devices in your repository. This endpoint has two different modes of operation.   * You can specify `deviceId`s and/or `deviceUuid`s any number of times as query parameters, and all devices matching those ids will be returned. * You can specify a number of different filter parameters, and only devices matching all of the filter parameters you specify will be returned. Available filter parameters:     * `nameContains`     * `hibernated`     * `status`     * `activatedAfter`     * `activatedBefore`     * `lastSeenStart`     * `lastSeenEnd`     * `createdAtStart`     * `createdAtEnd`         
+         Retrieves a list of devices in your repository. This endpoint has two different modes of operation.  * You can specify `deviceId`s and/or `deviceUuid`s any number of times as query parameters, and all devices matching those ids will be returned. * You can specify a number of different filter parameters, and only devices matching all of the filter parameters you specify will be returned. Available filter parameters:     * `nameContains`     * `hibernated`     * `status`     * `activatedAfter`     * `activatedBefore`     * `lastSeenStart`     * `lastSeenEnd`     * `createdAtStart`     * `createdAtEnd`         
 
         :param offset:
         :type offset: int
@@ -609,7 +611,7 @@ class DevicesApi:
     ) -> RESTResponseType:
         """Query device information
 
-         Retrieves a list of devices in your repository. This endpoint has two different modes of operation.   * You can specify `deviceId`s and/or `deviceUuid`s any number of times as query parameters, and all devices matching those ids will be returned. * You can specify a number of different filter parameters, and only devices matching all of the filter parameters you specify will be returned. Available filter parameters:     * `nameContains`     * `hibernated`     * `status`     * `activatedAfter`     * `activatedBefore`     * `lastSeenStart`     * `lastSeenEnd`     * `createdAtStart`     * `createdAtEnd`         
+         Retrieves a list of devices in your repository. This endpoint has two different modes of operation.  * You can specify `deviceId`s and/or `deviceUuid`s any number of times as query parameters, and all devices matching those ids will be returned. * You can specify a number of different filter parameters, and only devices matching all of the filter parameters you specify will be returned. Available filter parameters:     * `nameContains`     * `hibernated`     * `status`     * `activatedAfter`     * `activatedBefore`     * `lastSeenStart`     * `lastSeenEnd`     * `createdAtStart`     * `createdAtEnd`         
 
         :param offset:
         :type offset: int
@@ -1180,7 +1182,7 @@ class DevicesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> str:
+    ) -> DeviceNameRequest:
         """Get the display name of a single device
 
          Gets the display name of a device. The displayed name of the device is only a server-side concept; the device is not aware of its display name.         
@@ -1218,7 +1220,7 @@ class DevicesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "str",
+            '200': "DeviceNameRequest",
             '400': "BadRequestRepr",
             '404': "NotFoundRepr",
         }
@@ -1249,7 +1251,7 @@ class DevicesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[str]:
+    ) -> ApiResponse[DeviceNameRequest]:
         """Get the display name of a single device
 
          Gets the display name of a device. The displayed name of the device is only a server-side concept; the device is not aware of its display name.         
@@ -1287,7 +1289,7 @@ class DevicesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "str",
+            '200': "DeviceNameRequest",
             '400': "BadRequestRepr",
             '404': "NotFoundRepr",
         }
@@ -1356,7 +1358,7 @@ class DevicesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "str",
+            '200': "DeviceNameRequest",
             '400': "BadRequestRepr",
             '404': "NotFoundRepr",
         }
@@ -2015,7 +2017,7 @@ class DevicesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> str:
+    ) -> DeviceNotesRequest:
         """Get the device notes for a specific device
 
          Gets the device notes for a device. Device notes are shown in the web UI, and can be used to store additional information about the device.         
@@ -2053,7 +2055,7 @@ class DevicesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "str",
+            '200': "DeviceNotesRequest",
             '400': "BadRequestRepr",
             '404': "NotFoundRepr",
         }
@@ -2084,7 +2086,7 @@ class DevicesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[str]:
+    ) -> ApiResponse[DeviceNotesRequest]:
         """Get the device notes for a specific device
 
          Gets the device notes for a device. Device notes are shown in the web UI, and can be used to store additional information about the device.         
@@ -2122,7 +2124,7 @@ class DevicesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "str",
+            '200': "DeviceNotesRequest",
             '400': "BadRequestRepr",
             '404': "NotFoundRepr",
         }
@@ -2191,7 +2193,7 @@ class DevicesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "str",
+            '200': "DeviceNotesRequest",
             '400': "BadRequestRepr",
             '404': "NotFoundRepr",
         }
@@ -2872,7 +2874,7 @@ class DevicesApi:
     ) -> ProvisionInfo:
         """Retrieve device provisioning token
 
-        Retrieves a short-lived access token that can only be used to provision device
+         Retrieves a short-lived access token that can only be used to provision device  ### NOTE: Typical users of this API can create devices directly with their API token and will have no use for calling this endpoint.  This endpoint is intended to be used to generate a short-lived access token solely used to provision a device. (Like the Torizon Web App)                 
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2937,7 +2939,7 @@ class DevicesApi:
     ) -> ApiResponse[ProvisionInfo]:
         """Retrieve device provisioning token
 
-        Retrieves a short-lived access token that can only be used to provision device
+         Retrieves a short-lived access token that can only be used to provision device  ### NOTE: Typical users of this API can create devices directly with their API token and will have no use for calling this endpoint.  This endpoint is intended to be used to generate a short-lived access token solely used to provision a device. (Like the Torizon Web App)                 
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3002,7 +3004,7 @@ class DevicesApi:
     ) -> RESTResponseType:
         """Retrieve device provisioning token
 
-        Retrieves a short-lived access token that can only be used to provision device
+         Retrieves a short-lived access token that can only be used to provision device  ### NOTE: Typical users of this API can create devices directly with their API token and will have no use for calling this endpoint.  This endpoint is intended to be used to generate a short-lived access token solely used to provision a device. (Like the Torizon Web App)                 
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4223,7 +4225,7 @@ class DevicesApi:
     def put_devices_name_deviceuuid(
         self,
         device_uuid: StrictStr,
-        body: StrictStr,
+        device_name_request: DeviceNameRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4243,8 +4245,8 @@ class DevicesApi:
 
         :param device_uuid: (required)
         :type device_uuid: str
-        :param body: (required)
-        :type body: str
+        :param device_name_request: (required)
+        :type device_name_request: DeviceNameRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4269,7 +4271,7 @@ class DevicesApi:
 
         _param = self._put_devices_name_deviceuuid_serialize(
             device_uuid=device_uuid,
-            body=body,
+            device_name_request=device_name_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4296,7 +4298,7 @@ class DevicesApi:
     def put_devices_name_deviceuuid_with_http_info(
         self,
         device_uuid: StrictStr,
-        body: StrictStr,
+        device_name_request: DeviceNameRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4316,8 +4318,8 @@ class DevicesApi:
 
         :param device_uuid: (required)
         :type device_uuid: str
-        :param body: (required)
-        :type body: str
+        :param device_name_request: (required)
+        :type device_name_request: DeviceNameRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4342,7 +4344,7 @@ class DevicesApi:
 
         _param = self._put_devices_name_deviceuuid_serialize(
             device_uuid=device_uuid,
-            body=body,
+            device_name_request=device_name_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4369,7 +4371,7 @@ class DevicesApi:
     def put_devices_name_deviceuuid_without_preload_content(
         self,
         device_uuid: StrictStr,
-        body: StrictStr,
+        device_name_request: DeviceNameRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4389,8 +4391,8 @@ class DevicesApi:
 
         :param device_uuid: (required)
         :type device_uuid: str
-        :param body: (required)
-        :type body: str
+        :param device_name_request: (required)
+        :type device_name_request: DeviceNameRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4415,7 +4417,7 @@ class DevicesApi:
 
         _param = self._put_devices_name_deviceuuid_serialize(
             device_uuid=device_uuid,
-            body=body,
+            device_name_request=device_name_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4437,7 +4439,7 @@ class DevicesApi:
     def _put_devices_name_deviceuuid_serialize(
         self,
         device_uuid,
-        body,
+        device_name_request,
         _request_auth,
         _content_type,
         _headers,
@@ -4465,8 +4467,8 @@ class DevicesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if body is not None:
-            _body_params = body
+        if device_name_request is not None:
+            _body_params = device_name_request
 
 
         # set the HTTP header `Accept`
@@ -4518,7 +4520,7 @@ class DevicesApi:
     def put_devices_notes_deviceuuid(
         self,
         device_uuid: StrictStr,
-        body: StrictStr,
+        device_notes_request: DeviceNotesRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4538,8 +4540,8 @@ class DevicesApi:
 
         :param device_uuid: (required)
         :type device_uuid: str
-        :param body: (required)
-        :type body: str
+        :param device_notes_request: (required)
+        :type device_notes_request: DeviceNotesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4564,7 +4566,7 @@ class DevicesApi:
 
         _param = self._put_devices_notes_deviceuuid_serialize(
             device_uuid=device_uuid,
-            body=body,
+            device_notes_request=device_notes_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4591,7 +4593,7 @@ class DevicesApi:
     def put_devices_notes_deviceuuid_with_http_info(
         self,
         device_uuid: StrictStr,
-        body: StrictStr,
+        device_notes_request: DeviceNotesRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4611,8 +4613,8 @@ class DevicesApi:
 
         :param device_uuid: (required)
         :type device_uuid: str
-        :param body: (required)
-        :type body: str
+        :param device_notes_request: (required)
+        :type device_notes_request: DeviceNotesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4637,7 +4639,7 @@ class DevicesApi:
 
         _param = self._put_devices_notes_deviceuuid_serialize(
             device_uuid=device_uuid,
-            body=body,
+            device_notes_request=device_notes_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4664,7 +4666,7 @@ class DevicesApi:
     def put_devices_notes_deviceuuid_without_preload_content(
         self,
         device_uuid: StrictStr,
-        body: StrictStr,
+        device_notes_request: DeviceNotesRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4684,8 +4686,8 @@ class DevicesApi:
 
         :param device_uuid: (required)
         :type device_uuid: str
-        :param body: (required)
-        :type body: str
+        :param device_notes_request: (required)
+        :type device_notes_request: DeviceNotesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4710,7 +4712,7 @@ class DevicesApi:
 
         _param = self._put_devices_notes_deviceuuid_serialize(
             device_uuid=device_uuid,
-            body=body,
+            device_notes_request=device_notes_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4732,7 +4734,7 @@ class DevicesApi:
     def _put_devices_notes_deviceuuid_serialize(
         self,
         device_uuid,
-        body,
+        device_notes_request,
         _request_auth,
         _content_type,
         _headers,
@@ -4760,8 +4762,8 @@ class DevicesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if body is not None:
-            _body_params = body
+        if device_notes_request is not None:
+            _body_params = device_notes_request
 
 
         # set the HTTP header `Accept`

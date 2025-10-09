@@ -17,8 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from torizon_io_api.models.installed_package import InstalledPackage
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +28,7 @@ class DevicePackages(BaseModel):
     """
     DevicePackages
     """ # noqa: E501
-    device_uuid: StrictStr = Field(alias="deviceUuid")
+    device_uuid: UUID = Field(alias="deviceUuid")
     installed_packages: Optional[List[InstalledPackage]] = Field(default=None, alias="installedPackages")
     __properties: ClassVar[List[str]] = ["deviceUuid", "installedPackages"]
 

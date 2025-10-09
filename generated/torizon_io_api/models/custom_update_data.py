@@ -69,6 +69,9 @@ class CustomUpdateData(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of metadata
+        if self.metadata:
+            _dict['metadata'] = self.metadata.to_dict()
         # set to None if uri (nullable) is None
         # and model_fields_set contains the field
         if self.uri is None and "uri" in self.model_fields_set:
@@ -92,7 +95,7 @@ class CustomUpdateData(BaseModel):
 
         _obj = cls.model_validate({
             "uri": obj.get("uri"),
-            "metadata": obj.get("metadata")
+            "metadata": AnyOf.from_dict(obj["metadata"]) if obj.get("metadata") is not None else None
         })
         return _obj
 

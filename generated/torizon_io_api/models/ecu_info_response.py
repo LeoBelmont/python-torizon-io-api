@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List
+from typing_extensions import Annotated
 from torizon_io_api.models.ecu_info_image import EcuInfoImage
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +28,7 @@ class EcuInfoResponse(BaseModel):
     """
     EcuInfoResponse
     """ # noqa: E501
-    id: StrictStr
+    id: Annotated[str, Field(min_length=1, strict=True, max_length=64)]
     hardware_id: StrictStr = Field(alias="hardwareId")
     primary: StrictBool
     image: EcuInfoImage

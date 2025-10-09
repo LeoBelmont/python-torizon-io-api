@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List
+from uuid import UUID
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -26,7 +27,7 @@ class SimpleDeviceInfo(BaseModel):
     """
     SimpleDeviceInfo
     """ # noqa: E501
-    device_uuid: StrictStr = Field(alias="deviceUuid")
+    device_uuid: UUID = Field(alias="deviceUuid")
     device_id: StrictStr = Field(alias="deviceId")
     name: StrictStr
     __properties: ClassVar[List[str]] = ["deviceUuid", "deviceId", "name"]

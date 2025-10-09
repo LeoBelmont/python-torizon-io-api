@@ -17,8 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from torizon_io_api.models.time_aggregation import TimeAggregation
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +29,7 @@ class SeriesMeta(BaseModel):
     SeriesMeta
     """ # noqa: E501
     aggregation: TimeAggregation
-    device_ids: Optional[List[StrictStr]] = Field(default=None, alias="deviceIds")
+    device_ids: Optional[List[UUID]] = Field(default=None, alias="deviceIds")
     __properties: ClassVar[List[str]] = ["aggregation", "deviceIds"]
 
     model_config = ConfigDict(

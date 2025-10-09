@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from torizon_io_api.models.custom_update_data import CustomUpdateData
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,8 +30,8 @@ class UpdateRequest(BaseModel):
     """ # noqa: E501
     package_ids: Optional[List[StrictStr]] = Field(default=None, alias="packageIds")
     custom: Optional[Dict[str, CustomUpdateData]] = None
-    devices: Optional[List[StrictStr]] = None
-    fleets: Optional[List[StrictStr]] = None
+    devices: Optional[List[UUID]] = None
+    fleets: Optional[List[UUID]] = None
     __properties: ClassVar[List[str]] = ["packageIds", "custom", "devices", "fleets"]
 
     model_config = ConfigDict(

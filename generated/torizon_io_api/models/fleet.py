@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from torizon_io_api.models.fleet_type import FleetType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +29,7 @@ class Fleet(BaseModel):
     """
     Fleet
     """ # noqa: E501
-    id: StrictStr
+    id: UUID
     name: StrictStr
     created_at: datetime = Field(alias="createdAt")
     fleet_type: FleetType = Field(alias="fleetType")

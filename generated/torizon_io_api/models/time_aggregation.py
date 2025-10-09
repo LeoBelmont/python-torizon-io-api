@@ -70,9 +70,6 @@ class TimeAggregation(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of method
-        if self.method:
-            _dict['method'] = self.method.to_dict()
         return _dict
 
     @classmethod
@@ -86,7 +83,7 @@ class TimeAggregation(BaseModel):
 
         _obj = cls.model_validate({
             "bucket": obj.get("bucket"),
-            "method": TimeAggregationMethod.from_dict(obj["method"]) if obj.get("method") is not None else None
+            "method": obj.get("method")
         })
         return _obj
 

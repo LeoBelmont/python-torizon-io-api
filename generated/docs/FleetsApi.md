@@ -19,7 +19,9 @@ Method | HTTP request | Description
 
 Delete a fleet
 
- Permanently delete a fleet. Devices in the fleet are not deleted, but are no longer associated with the deleted fleet.         
+
+Permanently delete a fleet. Devices in the fleet are not deleted, but are no longer associated with the deleted fleet.
+        
 
 ### Example
 
@@ -96,7 +98,11 @@ void (empty response body)
 
 Remove devices from a fleet
 
- Removes devices, specified by a list of device UUIDs in the body, from a specific fleet.  Note: only applicable to static fleets.         
+
+Removes devices, specified by a list of device UUIDs in the body, from a specific fleet.
+
+Note: only applicable to static fleets.
+        
 
 ### Example
 
@@ -176,7 +182,9 @@ void (empty response body)
 
 Get information about all fleets in your repository
 
- Returns a list of fleets along with their UUIDs.         
+
+Returns a list of fleets along with their UUIDs.
+        
 
 ### Example
 
@@ -257,7 +265,9 @@ Name | Type | Description  | Notes
 
 Get information about a single fleet in your repository
 
- Returns fleet info for a single fleet.         
+
+Returns fleet info for a single fleet.
+        
 
 ### Example
 
@@ -337,7 +347,10 @@ Name | Type | Description  | Notes
 
 Get information about the devices in a single fleet
 
- Returns device information for all devices in the specified fleet. The schema for device data is the same as the [GET /devices](#/Devices/getDevices) endpoint.         
+
+Returns device information for all devices in the specified fleet. The schema for device data is the same as
+the [GET /devices](#/Devices/getDevices) endpoint.
+        
 
 ### Example
 
@@ -421,7 +434,14 @@ Name | Type | Description  | Notes
 
 Create a new fleet
 
- Creates a new fleet. You must specify a fleet name and a fleet type, which can be `static` or `dynamic`. Static fleets are the normal way of creating fleets on the Torizon platform. Dynamic fleets have an associated pattern matching expression, and devices that match the pattern are automatically added to the group.  If you are interested in using dynamic groups, please contact support--the expression language is not fully documented yet.         
+
+Creates a new fleet. You must specify a fleet name and a fleet type, which can be `static` or `dynamic`.
+Static fleets are the normal way of creating fleets on the Torizon platform. Dynamic fleets have an associated
+pattern matching expression, and devices that match the pattern are automatically added to the group.
+
+If you are interested in using dynamic groups, please contact support--the expression language is not fully
+documented yet.
+        
 
 ### Example
 
@@ -501,7 +521,11 @@ Name | Type | Description  | Notes
 
 Add devices to a fleet
 
- Adds devices, specified by a list of device UUIDs in the body, to a specific fleet.  Note: only applicable to static fleets.         
+
+Adds devices, specified by a list of device UUIDs in the body, to a specific fleet.
+
+Note: only applicable to static fleets.
+        
 
 ### Example
 
@@ -581,7 +605,9 @@ void (empty response body)
 
 Update fleet
 
- Updates fleet information.         
+
+Updates fleet information.
+        
 
 ### Example
 

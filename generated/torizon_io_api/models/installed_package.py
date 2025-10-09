@@ -19,7 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List
-from torizon_io_api.models.package_info import PackageInfo
+from torizon_io_api.models.package import Package
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +28,7 @@ class InstalledPackage(BaseModel):
     InstalledPackage
     """ # noqa: E501
     component: StrictStr
-    installed: PackageInfo
+    installed: Package
     __properties: ClassVar[List[str]] = ["component", "installed"]
 
     model_config = ConfigDict(
@@ -86,7 +86,7 @@ class InstalledPackage(BaseModel):
 
         _obj = cls.model_validate({
             "component": obj.get("component"),
-            "installed": PackageInfo.from_dict(obj["installed"]) if obj.get("installed") is not None else None
+            "installed": Package.from_dict(obj["installed"]) if obj.get("installed") is not None else None
         })
         return _obj
 

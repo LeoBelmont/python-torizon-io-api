@@ -12,12 +12,12 @@ Name | Type | Description | Notes
 **created_at** | **datetime** |  | 
 **activated_at** | **datetime** |  | [optional] 
 **device_status** | [**DeviceStatus**](DeviceStatus.md) |  | 
-**notes** | **str** |  | [optional] 
+**notes** | **str** |  | 
 **hibernated** | **bool** |  | 
 **last_updated** | **datetime** |  | [optional] 
 **device_fleets** | [**List[Fleet]**](Fleet.md) |  | [optional] 
-**device_packages** | [**List[DevicePackage]**](DevicePackage.md) |  | [optional] 
-**device_tags** | [**List[Tuple2DeviceTagIdDeviceTagValue]**](Tuple2DeviceTagIdDeviceTagValue.md) |  | [optional] 
+**device_packages** | [**List[InstalledPackage]**](InstalledPackage.md) |  | [optional] 
+**device_tags** | **List[List[object]]** |  | [optional] 
 **network_info** | [**NetworkInfo**](NetworkInfo.md) |  | 
 
 ## Example

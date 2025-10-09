@@ -16,8 +16,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictInt, StrictStr
+from pydantic import StrictInt
 from typing import List, Optional
+from uuid import UUID
 from torizon_io_api.models.create_fleet import CreateFleet
 from torizon_io_api.models.fleet import Fleet
 from torizon_io_api.models.pagination_result_device_info_basic import PaginationResultDeviceInfoBasic
@@ -45,7 +46,7 @@ class FleetsApi:
     @validate_call
     def delete_fleets_fleetid(
         self,
-        fleet_id: StrictStr,
+        fleet_id: UUID,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -114,7 +115,7 @@ class FleetsApi:
     @validate_call
     def delete_fleets_fleetid_with_http_info(
         self,
-        fleet_id: StrictStr,
+        fleet_id: UUID,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -183,7 +184,7 @@ class FleetsApi:
     @validate_call
     def delete_fleets_fleetid_without_preload_content(
         self,
-        fleet_id: StrictStr,
+        fleet_id: UUID,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -312,8 +313,8 @@ class FleetsApi:
     @validate_call
     def delete_fleets_fleetid_devices(
         self,
-        fleet_id: StrictStr,
-        request_body: Optional[List[StrictStr]] = None,
+        fleet_id: UUID,
+        request_body: Optional[List[UUID]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -386,8 +387,8 @@ class FleetsApi:
     @validate_call
     def delete_fleets_fleetid_devices_with_http_info(
         self,
-        fleet_id: StrictStr,
-        request_body: Optional[List[StrictStr]] = None,
+        fleet_id: UUID,
+        request_body: Optional[List[UUID]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -460,8 +461,8 @@ class FleetsApi:
     @validate_call
     def delete_fleets_fleetid_devices_without_preload_content(
         self,
-        fleet_id: StrictStr,
-        request_body: Optional[List[StrictStr]] = None,
+        fleet_id: UUID,
+        request_body: Optional[List[UUID]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -894,7 +895,7 @@ class FleetsApi:
     @validate_call
     def get_fleets_fleetid(
         self,
-        fleet_id: StrictStr,
+        fleet_id: UUID,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -963,7 +964,7 @@ class FleetsApi:
     @validate_call
     def get_fleets_fleetid_with_http_info(
         self,
-        fleet_id: StrictStr,
+        fleet_id: UUID,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1032,7 +1033,7 @@ class FleetsApi:
     @validate_call
     def get_fleets_fleetid_without_preload_content(
         self,
-        fleet_id: StrictStr,
+        fleet_id: UUID,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1161,7 +1162,7 @@ class FleetsApi:
     @validate_call
     def get_fleets_fleetid_devices(
         self,
-        fleet_id: StrictStr,
+        fleet_id: UUID,
         offset: Optional[StrictInt] = None,
         limit: Optional[StrictInt] = None,
         _request_timeout: Union[
@@ -1238,7 +1239,7 @@ class FleetsApi:
     @validate_call
     def get_fleets_fleetid_devices_with_http_info(
         self,
-        fleet_id: StrictStr,
+        fleet_id: UUID,
         offset: Optional[StrictInt] = None,
         limit: Optional[StrictInt] = None,
         _request_timeout: Union[
@@ -1315,7 +1316,7 @@ class FleetsApi:
     @validate_call
     def get_fleets_fleetid_devices_without_preload_content(
         self,
-        fleet_id: StrictStr,
+        fleet_id: UUID,
         offset: Optional[StrictInt] = None,
         limit: Optional[StrictInt] = None,
         _request_timeout: Union[
@@ -1742,8 +1743,8 @@ class FleetsApi:
     @validate_call
     def post_fleets_fleetid_devices(
         self,
-        fleet_id: StrictStr,
-        request_body: Optional[List[StrictStr]] = None,
+        fleet_id: UUID,
+        request_body: Optional[List[UUID]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1816,8 +1817,8 @@ class FleetsApi:
     @validate_call
     def post_fleets_fleetid_devices_with_http_info(
         self,
-        fleet_id: StrictStr,
-        request_body: Optional[List[StrictStr]] = None,
+        fleet_id: UUID,
+        request_body: Optional[List[UUID]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1890,8 +1891,8 @@ class FleetsApi:
     @validate_call
     def post_fleets_fleetid_devices_without_preload_content(
         self,
-        fleet_id: StrictStr,
-        request_body: Optional[List[StrictStr]] = None,
+        fleet_id: UUID,
+        request_body: Optional[List[UUID]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2041,7 +2042,7 @@ class FleetsApi:
     @validate_call
     def put_fleets_fleetid(
         self,
-        fleet_id: StrictStr,
+        fleet_id: UUID,
         update_fleet: UpdateFleet,
         _request_timeout: Union[
             None,
@@ -2113,7 +2114,7 @@ class FleetsApi:
     @validate_call
     def put_fleets_fleetid_with_http_info(
         self,
-        fleet_id: StrictStr,
+        fleet_id: UUID,
         update_fleet: UpdateFleet,
         _request_timeout: Union[
             None,
@@ -2185,7 +2186,7 @@ class FleetsApi:
     @validate_call
     def put_fleets_fleetid_without_preload_content(
         self,
-        fleet_id: StrictStr,
+        fleet_id: UUID,
         update_fleet: UpdateFleet,
         _request_timeout: Union[
             None,

@@ -79,6 +79,9 @@ class ExternalPackage(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of proprietary_meta
+        if self.proprietary_meta:
+            _dict['proprietaryMeta'] = self.proprietary_meta.to_dict()
         # set to None if pkg_type (nullable) is None
         # and model_fields_set contains the field
         if self.pkg_type is None and "pkg_type" in self.model_fields_set:
@@ -121,7 +124,7 @@ class ExternalPackage(BaseModel):
             "hardwareIds": obj.get("hardwareIds"),
             "createdAt": obj.get("createdAt"),
             "uri": obj.get("uri"),
-            "proprietaryMeta": obj.get("proprietaryMeta")
+            "proprietaryMeta": AnyOf.from_dict(obj["proprietaryMeta"]) if obj.get("proprietaryMeta") is not None else None
         })
         return _obj
 

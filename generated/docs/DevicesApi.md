@@ -27,7 +27,10 @@ Method | HTTP request | Description
 
 Delete a single device
 
- Permanently delete a device from your repository. Once deleted, the device will no longer be able to connect to the server.         
+
+Permanently delete a device from your repository. Once deleted, the device will no longer be able
+to connect to the server.
+        
 
 ### Example
 
@@ -104,7 +107,23 @@ void (empty response body)
 
 Query device information
 
- Retrieves a list of devices in your repository. This endpoint has two different modes of operation.   * You can specify `deviceId`s and/or `deviceUuid`s any number of times as query parameters, and all devices matching those ids will be returned. * You can specify a number of different filter parameters, and only devices matching all of the filter parameters you specify will be returned. Available filter parameters:     * `nameContains`     * `hibernated`     * `status`     * `activatedAfter`     * `activatedBefore`     * `lastSeenStart`     * `lastSeenEnd`     * `createdAtStart`     * `createdAtEnd`         
+
+Retrieves a list of devices in your repository. This endpoint has two different modes of operation.
+
+* You can specify `deviceId`s and/or `deviceUuid`s any number of times as query parameters, and all
+devices matching those ids will be returned.
+* You can specify a number of different filter parameters, and only devices matching all of the
+filter parameters you specify will be returned. Available filter parameters:
+    * `nameContains`
+    * `hibernated`
+    * `status`
+    * `activatedAfter`
+    * `activatedBefore`
+    * `lastSeenStart`
+    * `lastSeenEnd`
+    * `createdAtStart`
+    * `createdAtEnd`
+        
 
 ### Example
 
@@ -216,7 +235,15 @@ Name | Type | Description  | Notes
 
 Get detailed information about a single device
 
- Shows all available information about a single device. Included information: * Name, ID, UUID, notes (if any) * Time of provisioning, activation, latest update, and last connection to the repository * Any fleets the device is part of * Installed packages, if known * Network information (local IP address, MAC, hostname) * Device tags, if any         
+
+Shows all available information about a single device. Included information:
+* Name, ID, UUID, notes (if any)
+* Time of provisioning, activation, latest update, and last connection to the repository
+* Any fleets the device is part of
+* Installed packages, if known
+* Network information (local IP address, MAC, hostname)
+* Device tags, if any
+        
 
 ### Example
 
@@ -292,11 +319,14 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_devices_name_deviceuuid**
-> str get_devices_name_deviceuuid(device_uuid)
+> DeviceNameRequest get_devices_name_deviceuuid(device_uuid)
 
 Get the display name of a single device
 
- Gets the display name of a device. The displayed name of the device is only a server-side concept; the device is not aware of its display name.         
+
+Gets the display name of a device. The displayed name of the device is only a server-side concept; the device
+is not aware of its display name.
+        
 
 ### Example
 
@@ -304,6 +334,7 @@ Get the display name of a single device
 
 ```python
 import torizon_io_api
+from torizon_io_api.models.device_name_request import DeviceNameRequest
 from torizon_io_api.rest import ApiException
 from pprint import pprint
 
@@ -349,7 +380,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**str**
+[**DeviceNameRequest**](DeviceNameRequest.md)
 
 ### Authorization
 
@@ -375,7 +406,10 @@ Name | Type | Description  | Notes
 
 Get network information for many devices
 
- Retrieves network information (local IP address, MAC, hostname) for multiple devices. A list of devices can be specified as a query parameter; if no devices are specified will return information for all devices in the repository.         
+
+Retrieves network information (local IP address, MAC, hostname) for multiple devices. A list of devices can be specified
+as a query parameter; if no devices are specified will return information for all devices in the repository.
+        
 
 ### Example
 
@@ -534,11 +568,14 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_devices_notes_deviceuuid**
-> str get_devices_notes_deviceuuid(device_uuid)
+> DeviceNotesRequest get_devices_notes_deviceuuid(device_uuid)
 
 Get the device notes for a specific device
 
- Gets the device notes for a device. Device notes are shown in the web UI, and can be used to store additional information about the device.         
+
+Gets the device notes for a device. Device notes are shown in the web UI, and can be used to store additional
+information about the device.
+        
 
 ### Example
 
@@ -546,6 +583,7 @@ Get the device notes for a specific device
 
 ```python
 import torizon_io_api
+from torizon_io_api.models.device_notes_request import DeviceNotesRequest
 from torizon_io_api.rest import ApiException
 from pprint import pprint
 
@@ -591,7 +629,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**str**
+[**DeviceNotesRequest**](DeviceNotesRequest.md)
 
 ### Authorization
 
@@ -617,7 +655,10 @@ Name | Type | Description  | Notes
 
 Get information about the installed packages for many devices
 
- Returns a list of devices and the packages those devices have installed. A list of devices can be specified as a query parameter; if no devices are specified will return information for all devices in the repository.         
+
+Returns a list of devices and the packages those devices have installed. A list of devices can be specified as
+a query parameter; if no devices are specified will return information for all devices in the repository.
+        
 
 ### Example
 
@@ -783,7 +824,15 @@ Name | Type | Description  | Notes
 
 Retrieve device provisioning token
 
+
 Retrieves a short-lived access token that can only be used to provision device
+
+### NOTE:
+Typical users of this API can create devices directly with their API token and will
+have no use for calling this endpoint. 
+This endpoint is intended to be used to generate a short-lived access token solely used
+to provision a device. (Like the Torizon Web App)
+                
 
 ### Example
 
@@ -859,7 +908,14 @@ This endpoint does not need any parameter.
 
 Show detailed information about the currently-assigned update for a single device
 
- Returns the device's current update assignment, if any.  Update assignments are an Uptane concept. The assignment is what the device will be instructed to install, the next time it checks for an update. An update assignment does not necessarily mean the device will install an update. If, for example, the device reports that it already has all of the assigned software components installed, it will take no further action.         
+
+Returns the device's current update assignment, if any.
+
+Update assignments are an Uptane concept. The assignment is what the device will be instructed to install,
+the next time it checks for an update. An update assignment does not necessarily mean the device will install
+an update. If, for example, the device reports that it already has all of the assigned software components
+installed, it will take no further action.
+        
 
 ### Example
 
@@ -939,7 +995,24 @@ Name | Type | Description  | Notes
 
 Get a list of the software components reported by a single device
 
- Returns a list of the device components.  Components are an Uptane concept. In the Uptane standard, they are normally referred to as \"ECUs\", and represent individual discrete hardware modules in a vehicle. In TorizonCore, we use this concept to allow updates to be sent independently to different software components of the system.  In particular, TorizonCore devices will normally have at least two components: one for the base OS, and one for the application software.  Components have an ID (assumed to be the component's serial number in the automotive case) and a hardwareID (an indicator of the make or model of the component, for determining firmware/package compatibility). In TorizonCore, we give the application component the hardwareID \"docker-compose\", and the base OS component a hardwareID corresponding to the SoM's model (e.g. \"apalis-imx8\").  This endpoint returns a list of the components registered on the device, and the current software image installed on each one, if known.         
+
+Returns a list of the device components.
+
+Components are an Uptane concept. In the Uptane standard, they are normally referred to as "ECUs", and
+represent individual discrete hardware modules in a vehicle. In TorizonCore, we use this concept to allow
+updates to be sent independently to different software components of the system.
+
+In particular, TorizonCore devices will normally have at least two components: one for the base OS, and
+one for the application software.
+
+Components have an ID (assumed to be the component's serial number in the automotive case) and a hardwareID
+(an indicator of the make or model of the component, for determining firmware/package compatibility). In
+TorizonCore, we give the application component the hardwareID "docker-compose", and the base OS component a
+hardwareID corresponding to the SoM's model (e.g. "apalis-imx8").
+
+This endpoint returns a list of the components registered on the device, and the current software image
+installed on each one, if known.
+        
 
 ### Example
 
@@ -1019,7 +1092,18 @@ Name | Type | Description  | Notes
 
 Manually create a new device
 
- Creates a new device in your repository, returning the device credentials as a zipfile. This should not normally be used; the usual way to add a device is for the device itself to call this endpoint, using a short-lived provisioning token (for example, as retrieved from the [GET /devices/token](#/Devices/getDevicesToken) endpoint).  You can use this endpoint to create devices in bulk, but you will then have to manually provision the individual credentials onto each device.  `deviceId` must be specified. `deviceName` is optional; if not specified a random name will be generated. The `hibernated` parameter is optional, and defaults to `false`. If `hibernated` is set to `true`, the device will automatically be placed in hibernation mode as soon as it is created.         
+
+Creates a new device in your repository, returning the device credentials as a zipfile. This should not normally
+be used; the usual way to add a device is for the device itself to call this endpoint, using a short-lived
+provisioning token (for example, as retrieved from the [GET /devices/token](#/Devices/getDevicesToken) endpoint).
+
+You can use this endpoint to create devices in bulk, but you will then have to manually provision the individual
+credentials onto each device.
+
+`deviceId` must be specified. `deviceName` is optional; if not specified a random name will be generated.
+The `hibernated` parameter is optional, and defaults to `false`. If `hibernated` is set to `true`,
+the device will automatically be placed in hibernation mode as soon as it is created.
+        
 
 ### Example
 
@@ -1100,7 +1184,14 @@ Name | Type | Description  | Notes
 
 Set the hibernation status of a device
 
- Devices can be placed in _hibernation_ mode. When a device is hibernated, Torizon Cloud will respond to almost all requests from the device with a 403 HTTP status. It won't be able to check for or receive updates, send metrics, or be available for remote access.  Depending on your plan and billing contract, a hibernated device may not count towards your billable device quota. If you aren't sure how hibernated devices will affect your bill, contact Toradex sales.         
+
+Devices can be placed in _hibernation_ mode. When a device is hibernated, Torizon Cloud will respond to almost
+all requests from the device with a 403 HTTP status. It won't be able to check for or receive updates, send
+metrics, or be available for remote access.
+
+Depending on your plan and billing contract, a hibernated device may not count towards your billable device
+quota. If you aren't sure how hibernated devices will affect your bill, contact Toradex sales.
+        
 
 ### Example
 
@@ -1176,11 +1267,14 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_devices_name_deviceuuid**
-> put_devices_name_deviceuuid(device_uuid, body)
+> put_devices_name_deviceuuid(device_uuid, device_name_request)
 
 Set the display name of a single device
 
- Sets the display name of a device. The displayed name of the device is only a server-side concept; the device is not aware of its display name.         
+
+Sets the display name of a device. The displayed name of the device is only a server-side concept; the device
+is not aware of its display name.
+        
 
 ### Example
 
@@ -1188,6 +1282,7 @@ Set the display name of a single device
 
 ```python
 import torizon_io_api
+from torizon_io_api.models.device_name_request import DeviceNameRequest
 from torizon_io_api.rest import ApiException
 from pprint import pprint
 
@@ -1212,11 +1307,11 @@ with torizon_io_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = torizon_io_api.DevicesApi(api_client)
     device_uuid = 'device_uuid_example' # str | 
-    body = 'body_example' # str | 
+    device_name_request = torizon_io_api.DeviceNameRequest() # DeviceNameRequest | 
 
     try:
         # Set the display name of a single device
-        api_instance.put_devices_name_deviceuuid(device_uuid, body)
+        api_instance.put_devices_name_deviceuuid(device_uuid, device_name_request)
     except Exception as e:
         print("Exception when calling DevicesApi->put_devices_name_deviceuuid: %s\n" % e)
 ```
@@ -1229,7 +1324,7 @@ with torizon_io_api.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **device_uuid** | **str**|  | 
- **body** | **str**|  | 
+ **device_name_request** | [**DeviceNameRequest**](DeviceNameRequest.md)|  | 
 
 ### Return type
 
@@ -1255,11 +1350,15 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_devices_notes_deviceuuid**
-> put_devices_notes_deviceuuid(device_uuid, body)
+> put_devices_notes_deviceuuid(device_uuid, device_notes_request)
 
 Set the device notes for a specific device
 
- Sets the device notes for a device. Device notes are shown in the web UI, and can be used to store additional information about the device. Accepts a string up to approximately 64kb; will be rendered as Markdown in the web UI.         
+
+Sets the device notes for a device. Device notes are shown in the web UI, and can be used to store additional
+information about the device. Accepts a string up to approximately 64kb; will be rendered as Markdown in the
+web UI.
+        
 
 ### Example
 
@@ -1267,6 +1366,7 @@ Set the device notes for a specific device
 
 ```python
 import torizon_io_api
+from torizon_io_api.models.device_notes_request import DeviceNotesRequest
 from torizon_io_api.rest import ApiException
 from pprint import pprint
 
@@ -1291,11 +1391,11 @@ with torizon_io_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = torizon_io_api.DevicesApi(api_client)
     device_uuid = 'device_uuid_example' # str | 
-    body = 'body_example' # str | 
+    device_notes_request = torizon_io_api.DeviceNotesRequest() # DeviceNotesRequest | 
 
     try:
         # Set the device notes for a specific device
-        api_instance.put_devices_notes_deviceuuid(device_uuid, body)
+        api_instance.put_devices_notes_deviceuuid(device_uuid, device_notes_request)
     except Exception as e:
         print("Exception when calling DevicesApi->put_devices_notes_deviceuuid: %s\n" % e)
 ```
@@ -1308,7 +1408,7 @@ with torizon_io_api.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **device_uuid** | **str**|  | 
- **body** | **str**|  | 
+ **device_notes_request** | [**DeviceNotesRequest**](DeviceNotesRequest.md)|  | 
 
 ### Return type
 

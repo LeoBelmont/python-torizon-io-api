@@ -31,6 +31,7 @@ class DeviceStatus(str, Enum):
     UPTODATE = 'UpToDate'
     UPDATEPENDING = 'UpdatePending'
     OUTDATED = 'Outdated'
+    UPDATESCHEDULED = 'UpdateScheduled'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

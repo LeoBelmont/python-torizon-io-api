@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,7 +30,7 @@ class DeviceCreateReq(BaseModel):
     device_name: Optional[StrictStr] = Field(default=None, alias="deviceName")
     device_id: StrictStr = Field(alias="deviceId")
     hibernated: Optional[StrictBool] = None
-    fleet_ids: Optional[List[StrictStr]] = Field(default=None, alias="fleetIds")
+    fleet_ids: Optional[List[UUID]] = Field(default=None, alias="fleetIds")
     __properties: ClassVar[List[str]] = ["deviceName", "deviceId", "hibernated", "fleetIds"]
 
     model_config = ConfigDict(

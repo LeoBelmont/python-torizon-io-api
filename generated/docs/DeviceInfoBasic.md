@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **created_at** | **datetime** |  | 
 **activated_at** | **datetime** |  | [optional] 
 **device_status** | [**DeviceStatus**](DeviceStatus.md) |  | 
-**notes** | **str** |  | [optional] 
+**notes** | **str** |  | 
 **attributes** | **Dict[str, str]** |  | [optional] 
 **hibernated** | **bool** |  | 
 

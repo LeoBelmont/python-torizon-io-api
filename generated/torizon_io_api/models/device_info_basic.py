@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from torizon_io_api.models.device_status import DeviceStatus
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,14 +29,14 @@ class DeviceInfoBasic(BaseModel):
     """
     DeviceInfoBasic
     """ # noqa: E501
-    device_uuid: StrictStr = Field(alias="deviceUuid")
+    device_uuid: UUID = Field(alias="deviceUuid")
     device_name: StrictStr = Field(alias="deviceName")
     device_id: StrictStr = Field(alias="deviceId")
     last_seen: Optional[datetime] = Field(default=None, alias="lastSeen")
     created_at: datetime = Field(alias="createdAt")
     activated_at: Optional[datetime] = Field(default=None, alias="activatedAt")
     device_status: DeviceStatus = Field(alias="deviceStatus")
-    notes: Optional[StrictStr] = None
+    notes: StrictStr
     attributes: Optional[Dict[str, StrictStr]] = None
     hibernated: StrictBool
     __properties: ClassVar[List[str]] = ["deviceUuid", "deviceName", "deviceId", "lastSeen", "createdAt", "activatedAt", "deviceStatus", "notes", "attributes", "hibernated"]
@@ -88,11 +89,6 @@ class DeviceInfoBasic(BaseModel):
         # and model_fields_set contains the field
         if self.activated_at is None and "activated_at" in self.model_fields_set:
             _dict['activatedAt'] = None
-
-        # set to None if notes (nullable) is None
-        # and model_fields_set contains the field
-        if self.notes is None and "notes" in self.model_fields_set:
-            _dict['notes'] = None
 
         return _dict
 

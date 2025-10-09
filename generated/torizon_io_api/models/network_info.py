@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -26,7 +27,7 @@ class NetworkInfo(BaseModel):
     """
     NetworkInfo
     """ # noqa: E501
-    device_uuid: StrictStr = Field(alias="deviceUuid")
+    device_uuid: UUID = Field(alias="deviceUuid")
     local_ip_v4: Optional[StrictStr] = Field(default=None, alias="localIpV4")
     hostname: Optional[StrictStr] = None
     mac_address: Optional[StrictStr] = Field(default=None, alias="macAddress")

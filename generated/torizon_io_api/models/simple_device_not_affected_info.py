@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List
+from uuid import UUID
 from torizon_io_api.models.error_representation import ErrorRepresentation
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +28,7 @@ class SimpleDeviceNotAffectedInfo(BaseModel):
     """
     SimpleDeviceNotAffectedInfo
     """ # noqa: E501
-    device_uuid: StrictStr = Field(alias="deviceUuid")
+    device_uuid: UUID = Field(alias="deviceUuid")
     device_id: StrictStr = Field(alias="deviceId")
     name: StrictStr
     ecu_errors: Dict[str, ErrorRepresentation] = Field(alias="ecuErrors")
