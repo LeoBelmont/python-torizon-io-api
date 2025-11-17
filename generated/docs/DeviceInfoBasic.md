@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**device_uuid** | **str** |  | 
+**device_uuid** | **UUID** |  | 
 **device_name** | **str** |  | 
 **device_id** | **str** |  | 
 **last_seen** | **datetime** |  | [optional] 
@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **activated_at** | **datetime** |  | [optional] 
 **device_status** | [**DeviceStatus**](DeviceStatus.md) |  | 
 **notes** | **str** |  | 
-**tags** | **Dict[str, str]** |  | 
+**attributes** | **Dict[str, str]** |  | [optional] 
 **hibernated** | **bool** |  | 
 
 ## Example

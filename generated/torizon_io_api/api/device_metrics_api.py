@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-    Torizon OTA v2beta API
+    Torizon OTA
 
      This API is rate limited and will return the following headers for each API call.    - X-RateLimit-Limit - The total number of requests allowed within a time period   - X-RateLimit-Remaining - The total number of requests still allowed until the end of the rate limiting period   - X-RateLimit-Reset - The number of seconds until the limit is fully reset  In addition, if an API client is rate limited, it will receive a HTTP 420 response with the following header:     - Retry-After - The number of seconds to wait until this request is allowed  
 
@@ -24,7 +24,7 @@ from torizon_io_api.models.detailed_metric_query import DetailedMetricQuery
 from torizon_io_api.models.fleet_metrics_outliers_request import FleetMetricsOutliersRequest
 from torizon_io_api.models.fleet_metrics_outliers_response import FleetMetricsOutliersResponse
 from torizon_io_api.models.metrics_response import MetricsResponse
-from torizon_io_api.models.pagination_result_string import PaginationResultString
+from torizon_io_api.models.pagination_result_java_lang_string import PaginationResultJavaLangString
 
 from torizon_io_api.api_client import ApiClient, RequestSerialized
 from torizon_io_api.api_response import ApiResponse
@@ -119,7 +119,7 @@ class DeviceMetricsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MetricsResponse",
-            '400': "PostUpdates400Response",
+            '400': "UpstreamEndpointErrorRepr",
             '416': "RangeNotSatisfiableRepr",
         }
         response_data = self.api_client.call_api(
@@ -208,7 +208,7 @@ class DeviceMetricsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MetricsResponse",
-            '400': "PostUpdates400Response",
+            '400': "UpstreamEndpointErrorRepr",
             '416': "RangeNotSatisfiableRepr",
         }
         response_data = self.api_client.call_api(
@@ -297,7 +297,7 @@ class DeviceMetricsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MetricsResponse",
-            '400': "PostUpdates400Response",
+            '400': "UpstreamEndpointErrorRepr",
             '416': "RangeNotSatisfiableRepr",
         }
         response_data = self.api_client.call_api(
@@ -469,7 +469,7 @@ class DeviceMetricsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MetricsResponse",
-            '400': "PostUpdates400Response",
+            '400': "UpstreamEndpointErrorRepr",
             '404': "NotFoundRepr",
             '416': "RangeNotSatisfiableRepr",
         }
@@ -555,7 +555,7 @@ class DeviceMetricsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MetricsResponse",
-            '400': "PostUpdates400Response",
+            '400': "UpstreamEndpointErrorRepr",
             '404': "NotFoundRepr",
             '416': "RangeNotSatisfiableRepr",
         }
@@ -641,7 +641,7 @@ class DeviceMetricsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MetricsResponse",
-            '400': "PostUpdates400Response",
+            '400': "UpstreamEndpointErrorRepr",
             '404': "NotFoundRepr",
             '416': "RangeNotSatisfiableRepr",
         }
@@ -763,7 +763,7 @@ class DeviceMetricsApi:
          This endpoint will return aggregated time-bucketed data as reported by the devices in the specified fleet. You must  specify a time interval in Unix Epoch milliseconds via the `from` and `to` query parameters.   You can also specify a `resolution`. This parameter defaults to 200, with a maximum permitted value of 2000, and  determines the granularity of the data returned. The data returned will be separated into buckets, with each bucket  representing the aggregated data from the period. For example, if you specify a one day long time interval with a resolution of 24, you will get 24 buckets, each representing a one hour slice of the day. If you request a resolution  of 48, your buckets will be 30 minutes long.  You also must specify one or more metrics as query parameters (e.g. `metrics=metric1&metrics=metrics2`, etc. OR  `metrics[]=metric1,metrics2`, etc.). For each metric you specify, you will get back four different series of datapoints:   * `{metric}-count` reports how many devices in the fleet actually reported data during this time interval. * `{metric}-avg` reports the average value of all reported values for the metric in the period. Note that the average  is over the number of devices that reported data: devices that didn't report the metric during the interval will not be reflected in this datapoint. * `{metric}-max` gives the highest value reported by a device in the specified interval * `{metric}-min` gives the lowest value reported by a device in the specified interval         
 
         :param fleet_id: (required)
-        :type fleet_id: str
+        :type fleet_id: UUID
         :param var_from: (required)
         :type var_from: int
         :param to: (required)
@@ -808,7 +808,7 @@ class DeviceMetricsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MetricsResponse",
-            '400': "PostUpdates400Response",
+            '400': "UpstreamEndpointErrorRepr",
             '416': "RangeNotSatisfiableRepr",
         }
         response_data = self.api_client.call_api(
@@ -848,7 +848,7 @@ class DeviceMetricsApi:
          This endpoint will return aggregated time-bucketed data as reported by the devices in the specified fleet. You must  specify a time interval in Unix Epoch milliseconds via the `from` and `to` query parameters.   You can also specify a `resolution`. This parameter defaults to 200, with a maximum permitted value of 2000, and  determines the granularity of the data returned. The data returned will be separated into buckets, with each bucket  representing the aggregated data from the period. For example, if you specify a one day long time interval with a resolution of 24, you will get 24 buckets, each representing a one hour slice of the day. If you request a resolution  of 48, your buckets will be 30 minutes long.  You also must specify one or more metrics as query parameters (e.g. `metrics=metric1&metrics=metrics2`, etc. OR  `metrics[]=metric1,metrics2`, etc.). For each metric you specify, you will get back four different series of datapoints:   * `{metric}-count` reports how many devices in the fleet actually reported data during this time interval. * `{metric}-avg` reports the average value of all reported values for the metric in the period. Note that the average  is over the number of devices that reported data: devices that didn't report the metric during the interval will not be reflected in this datapoint. * `{metric}-max` gives the highest value reported by a device in the specified interval * `{metric}-min` gives the lowest value reported by a device in the specified interval         
 
         :param fleet_id: (required)
-        :type fleet_id: str
+        :type fleet_id: UUID
         :param var_from: (required)
         :type var_from: int
         :param to: (required)
@@ -893,7 +893,7 @@ class DeviceMetricsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MetricsResponse",
-            '400': "PostUpdates400Response",
+            '400': "UpstreamEndpointErrorRepr",
             '416': "RangeNotSatisfiableRepr",
         }
         response_data = self.api_client.call_api(
@@ -933,7 +933,7 @@ class DeviceMetricsApi:
          This endpoint will return aggregated time-bucketed data as reported by the devices in the specified fleet. You must  specify a time interval in Unix Epoch milliseconds via the `from` and `to` query parameters.   You can also specify a `resolution`. This parameter defaults to 200, with a maximum permitted value of 2000, and  determines the granularity of the data returned. The data returned will be separated into buckets, with each bucket  representing the aggregated data from the period. For example, if you specify a one day long time interval with a resolution of 24, you will get 24 buckets, each representing a one hour slice of the day. If you request a resolution  of 48, your buckets will be 30 minutes long.  You also must specify one or more metrics as query parameters (e.g. `metrics=metric1&metrics=metrics2`, etc. OR  `metrics[]=metric1,metrics2`, etc.). For each metric you specify, you will get back four different series of datapoints:   * `{metric}-count` reports how many devices in the fleet actually reported data during this time interval. * `{metric}-avg` reports the average value of all reported values for the metric in the period. Note that the average  is over the number of devices that reported data: devices that didn't report the metric during the interval will not be reflected in this datapoint. * `{metric}-max` gives the highest value reported by a device in the specified interval * `{metric}-min` gives the lowest value reported by a device in the specified interval         
 
         :param fleet_id: (required)
-        :type fleet_id: str
+        :type fleet_id: UUID
         :param var_from: (required)
         :type var_from: int
         :param to: (required)
@@ -978,7 +978,7 @@ class DeviceMetricsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MetricsResponse",
-            '400': "PostUpdates400Response",
+            '400': "UpstreamEndpointErrorRepr",
             '416': "RangeNotSatisfiableRepr",
         }
         response_data = self.api_client.call_api(
@@ -1090,7 +1090,7 @@ class DeviceMetricsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> PaginationResultString:
+    ) -> PaginationResultJavaLangString:
         """Get the list of metrics available in your repository
 
          Lists the metrics available in your repository.  In the default TorizonCore configuration, devices will report certain default metrics. You can also add your own metrics, as described in the [TorizonCore documentation](https://developer.toradex.com/torizon/torizon-platform/device-monitoring-in-torizoncore/#customizing-device-metrics-for-torizon-platform). Calling this endpoint will give you the list of valid metric names for your repository; generally this will include the default set plus any that you have defined yourself.  You can optionally specify a time interval in Unix Epoch milliseconds via the `from` and `to` query parameters. This will return the list of metrics reported by devices in your repository during that specific interval.         
@@ -1131,8 +1131,8 @@ class DeviceMetricsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PaginationResultString",
-            '400': "PostUpdates400Response",
+            '200': "PaginationResultJavaLangString",
+            '400': "UpstreamEndpointErrorRepr",
             '404': "NotFoundRepr",
             '416': "RangeNotSatisfiableRepr",
         }
@@ -1164,7 +1164,7 @@ class DeviceMetricsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[PaginationResultString]:
+    ) -> ApiResponse[PaginationResultJavaLangString]:
         """Get the list of metrics available in your repository
 
          Lists the metrics available in your repository.  In the default TorizonCore configuration, devices will report certain default metrics. You can also add your own metrics, as described in the [TorizonCore documentation](https://developer.toradex.com/torizon/torizon-platform/device-monitoring-in-torizoncore/#customizing-device-metrics-for-torizon-platform). Calling this endpoint will give you the list of valid metric names for your repository; generally this will include the default set plus any that you have defined yourself.  You can optionally specify a time interval in Unix Epoch milliseconds via the `from` and `to` query parameters. This will return the list of metrics reported by devices in your repository during that specific interval.         
@@ -1205,8 +1205,8 @@ class DeviceMetricsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PaginationResultString",
-            '400': "PostUpdates400Response",
+            '200': "PaginationResultJavaLangString",
+            '400': "UpstreamEndpointErrorRepr",
             '404': "NotFoundRepr",
             '416': "RangeNotSatisfiableRepr",
         }
@@ -1279,8 +1279,8 @@ class DeviceMetricsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PaginationResultString",
-            '400': "PostUpdates400Response",
+            '200': "PaginationResultJavaLangString",
+            '400': "UpstreamEndpointErrorRepr",
             '404': "NotFoundRepr",
             '416': "RangeNotSatisfiableRepr",
         }
@@ -1385,7 +1385,7 @@ class DeviceMetricsApi:
          Response will contain a list of outlier metrics for the provided fleet of devices  The Request Body contains several keys: * metrics - a list of metric names (max of 5) * from - unix timestamp (milliseconds since epoch) marking beginning of sample * to - unix timestamp (milliseconds since epoch) marking end of sample * aggregation - Optional whether the outliers are above or below the average. Min|Max (default Max) * limit - Optional Int limiting number of response values (maximum is 10)           
 
         :param fleet_id: (required)
-        :type fleet_id: str
+        :type fleet_id: UUID
         :param fleet_metrics_outliers_request: (required)
         :type fleet_metrics_outliers_request: FleetMetricsOutliersRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -1421,7 +1421,7 @@ class DeviceMetricsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FleetMetricsOutliersResponse",
-            '400': "PostUpdates400Response",
+            '400': "UpstreamEndpointErrorRepr",
             '404': "NotFoundRepr",
             '416': "RangeNotSatisfiableRepr",
         }
@@ -1459,7 +1459,7 @@ class DeviceMetricsApi:
          Response will contain a list of outlier metrics for the provided fleet of devices  The Request Body contains several keys: * metrics - a list of metric names (max of 5) * from - unix timestamp (milliseconds since epoch) marking beginning of sample * to - unix timestamp (milliseconds since epoch) marking end of sample * aggregation - Optional whether the outliers are above or below the average. Min|Max (default Max) * limit - Optional Int limiting number of response values (maximum is 10)           
 
         :param fleet_id: (required)
-        :type fleet_id: str
+        :type fleet_id: UUID
         :param fleet_metrics_outliers_request: (required)
         :type fleet_metrics_outliers_request: FleetMetricsOutliersRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -1495,7 +1495,7 @@ class DeviceMetricsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FleetMetricsOutliersResponse",
-            '400': "PostUpdates400Response",
+            '400': "UpstreamEndpointErrorRepr",
             '404': "NotFoundRepr",
             '416': "RangeNotSatisfiableRepr",
         }
@@ -1533,7 +1533,7 @@ class DeviceMetricsApi:
          Response will contain a list of outlier metrics for the provided fleet of devices  The Request Body contains several keys: * metrics - a list of metric names (max of 5) * from - unix timestamp (milliseconds since epoch) marking beginning of sample * to - unix timestamp (milliseconds since epoch) marking end of sample * aggregation - Optional whether the outliers are above or below the average. Min|Max (default Max) * limit - Optional Int limiting number of response values (maximum is 10)           
 
         :param fleet_id: (required)
-        :type fleet_id: str
+        :type fleet_id: UUID
         :param fleet_metrics_outliers_request: (required)
         :type fleet_metrics_outliers_request: FleetMetricsOutliersRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -1569,7 +1569,7 @@ class DeviceMetricsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FleetMetricsOutliersResponse",
-            '400': "PostUpdates400Response",
+            '400': "UpstreamEndpointErrorRepr",
             '404': "NotFoundRepr",
             '416': "RangeNotSatisfiableRepr",
         }
@@ -1683,7 +1683,7 @@ class DeviceMetricsApi:
          Returns either a csv or json file of all the datapoints specified in the query  The query contains these keys:  * metrics - a list of metric names * from - unix timestamp (milliseconds since epoch) marking beginning of report * to - unix timestamp (milliseconds since epoch) marking end of report * datapointCount - Optional Int - the total number of datapoints to be included in the report * totalBuckets - Optional Int - the total number of buckets to be included in the report    **Note:** One of datapointCount OR totalBuckets must be specified           
 
         :param fleet_id: (required)
-        :type fleet_id: str
+        :type fleet_id: UUID
         :param detailed_metric_query: (required)
         :type detailed_metric_query: DetailedMetricQuery
         :param _request_timeout: timeout setting for this request. If one
@@ -1719,7 +1719,7 @@ class DeviceMetricsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MetricsResponse",
-            '400': "PostUpdates400Response",
+            '400': "UpstreamEndpointErrorRepr",
             '404': "NotFoundRepr",
             '416': "RangeNotSatisfiableRepr",
         }
@@ -1757,7 +1757,7 @@ class DeviceMetricsApi:
          Returns either a csv or json file of all the datapoints specified in the query  The query contains these keys:  * metrics - a list of metric names * from - unix timestamp (milliseconds since epoch) marking beginning of report * to - unix timestamp (milliseconds since epoch) marking end of report * datapointCount - Optional Int - the total number of datapoints to be included in the report * totalBuckets - Optional Int - the total number of buckets to be included in the report    **Note:** One of datapointCount OR totalBuckets must be specified           
 
         :param fleet_id: (required)
-        :type fleet_id: str
+        :type fleet_id: UUID
         :param detailed_metric_query: (required)
         :type detailed_metric_query: DetailedMetricQuery
         :param _request_timeout: timeout setting for this request. If one
@@ -1793,7 +1793,7 @@ class DeviceMetricsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MetricsResponse",
-            '400': "PostUpdates400Response",
+            '400': "UpstreamEndpointErrorRepr",
             '404': "NotFoundRepr",
             '416': "RangeNotSatisfiableRepr",
         }
@@ -1831,7 +1831,7 @@ class DeviceMetricsApi:
          Returns either a csv or json file of all the datapoints specified in the query  The query contains these keys:  * metrics - a list of metric names * from - unix timestamp (milliseconds since epoch) marking beginning of report * to - unix timestamp (milliseconds since epoch) marking end of report * datapointCount - Optional Int - the total number of datapoints to be included in the report * totalBuckets - Optional Int - the total number of buckets to be included in the report    **Note:** One of datapointCount OR totalBuckets must be specified           
 
         :param fleet_id: (required)
-        :type fleet_id: str
+        :type fleet_id: UUID
         :param detailed_metric_query: (required)
         :type detailed_metric_query: DetailedMetricQuery
         :param _request_timeout: timeout setting for this request. If one
@@ -1867,7 +1867,7 @@ class DeviceMetricsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "MetricsResponse",
-            '400': "PostUpdates400Response",
+            '400': "UpstreamEndpointErrorRepr",
             '404': "NotFoundRepr",
             '416': "RangeNotSatisfiableRepr",
         }

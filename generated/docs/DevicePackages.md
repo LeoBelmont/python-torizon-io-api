@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**device_uuid** | **str** |  | 
+**device_uuid** | **UUID** |  | 
 **installed_packages** | [**List[InstalledPackage]**](InstalledPackage.md) |  | [optional] 
 
 ## Example

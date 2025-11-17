@@ -6,10 +6,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **msg** | **str** |  | 
-**description** | [**AnyOf**](AnyOf.md) |  | [optional] 
+**description** | **object** |  | [optional] 
 **code** | **str** |  | 
-**cause** | [**AnyOf**](AnyOf.md) |  | [optional] 
-**error_id** | **str** |  | [optional] 
+**cause** | **object** |  | [optional] 
+**error_id** | **UUID** |  | [optional] 
 
 ## Example
 

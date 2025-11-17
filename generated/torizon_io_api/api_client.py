@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-    Torizon OTA v2beta API
+    Torizon OTA
 
      This API is rate limited and will return the following headers for each API call.    - X-RateLimit-Limit - The total number of requests allowed within a time period   - X-RateLimit-Remaining - The total number of requests still allowed until the end of the rate limiting period   - X-RateLimit-Reset - The number of seconds until the limit is fully reset  In addition, if an API client is rate limited, it will receive a HTTP 420 response with the following header:     - Retry-After - The number of seconds to wait until this request is allowed  
 
@@ -91,7 +91,7 @@ class ApiClient:
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'OpenAPI-Generator/0.0.3/python'
+        self.user_agent = 'OpenAPI-Generator/0.0.5/python'
         self.client_side_validation = configuration.client_side_validation
 
     def __enter__(self):

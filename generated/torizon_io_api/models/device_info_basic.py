@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-    Torizon OTA v2beta API
+    Torizon OTA
 
      This API is rate limited and will return the following headers for each API call.    - X-RateLimit-Limit - The total number of requests allowed within a time period   - X-RateLimit-Remaining - The total number of requests still allowed until the end of the rate limiting period   - X-RateLimit-Reset - The number of seconds until the limit is fully reset  In addition, if an API client is rate limited, it will receive a HTTP 420 response with the following header:     - Retry-After - The number of seconds to wait until this request is allowed  
 
@@ -18,9 +18,8 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
 from uuid import UUID
 from torizon_io_api.models.device_status import DeviceStatus
 from typing import Optional, Set
@@ -38,9 +37,9 @@ class DeviceInfoBasic(BaseModel):
     activated_at: Optional[datetime] = Field(default=None, alias="activatedAt")
     device_status: DeviceStatus = Field(alias="deviceStatus")
     notes: StrictStr
-    tags: Dict[str, Annotated[str, Field(strict=True, max_length=254)]]
+    attributes: Optional[Dict[str, StrictStr]] = None
     hibernated: StrictBool
-    __properties: ClassVar[List[str]] = ["deviceUuid", "deviceName", "deviceId", "lastSeen", "createdAt", "activatedAt", "deviceStatus", "notes", "tags", "hibernated"]
+    __properties: ClassVar[List[str]] = ["deviceUuid", "deviceName", "deviceId", "lastSeen", "createdAt", "activatedAt", "deviceStatus", "notes", "attributes", "hibernated"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -111,7 +110,7 @@ class DeviceInfoBasic(BaseModel):
             "activatedAt": obj.get("activatedAt"),
             "deviceStatus": obj.get("deviceStatus"),
             "notes": obj.get("notes"),
-            "tags": obj.get("tags"),
+            "attributes": obj.get("attributes"),
             "hibernated": obj.get("hibernated")
         })
         return _obj

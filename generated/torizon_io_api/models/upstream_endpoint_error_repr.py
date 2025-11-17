@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-    Torizon OTA v2beta API
+    Torizon OTA
 
      This API is rate limited and will return the following headers for each API call.    - X-RateLimit-Limit - The total number of requests allowed within a time period   - X-RateLimit-Remaining - The total number of requests still allowed until the end of the rate limiting period   - X-RateLimit-Reset - The number of seconds until the limit is fully reset  In addition, if an API client is rate limited, it will receive a HTTP 420 response with the following header:     - Retry-After - The number of seconds to wait until this request is allowed  
 
@@ -73,12 +73,6 @@ class UpstreamEndpointErrorRepr(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of description
-        if self.description:
-            _dict['description'] = self.description.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of cause
-        if self.cause:
-            _dict['cause'] = self.cause.to_dict()
         # set to None if description (nullable) is None
         # and model_fields_set contains the field
         if self.description is None and "description" in self.model_fields_set:
@@ -107,9 +101,9 @@ class UpstreamEndpointErrorRepr(BaseModel):
 
         _obj = cls.model_validate({
             "msg": obj.get("msg"),
-            "description": AnyOf.from_dict(obj["description"]) if obj.get("description") is not None else None,
+            "description": obj.get("description"),
             "code": obj.get("code"),
-            "cause": AnyOf.from_dict(obj["cause"]) if obj.get("cause") is not None else None,
+            "cause": obj.get("cause"),
             "errorId": obj.get("errorId")
         })
         return _obj

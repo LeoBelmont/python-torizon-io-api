@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **package_ids** | **List[str]** |  | [optional] 
 **custom** | [**Dict[str, CustomUpdateData]**](CustomUpdateData.md) |  | [optional] 
-**devices** | **List[str]** |  | [optional] 
-**fleets** | **List[str]** |  | [optional] 
+**devices** | **List[UUID]** |  | [optional] 
+**fleets** | **List[UUID]** |  | [optional] 
 
 ## Example
 

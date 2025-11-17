@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  | 
+**id** | **UUID** |  | 
 **name** | **str** |  | 
 **created_at** | **datetime** |  | 
 **fleet_type** | [**FleetType**](FleetType.md) |  | 

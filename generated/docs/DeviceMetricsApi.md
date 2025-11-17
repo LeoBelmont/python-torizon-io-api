@@ -273,7 +273,7 @@ configuration = torizon_io_api.Configuration(
 with torizon_io_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = torizon_io_api.DeviceMetricsApi(api_client)
-    fleet_id = 'fleet_id_example' # str | 
+    fleet_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     var_from = 56 # int | 
     to = 56 # int | 
     metric = ['metric_example'] # List[str] |  (optional)
@@ -295,7 +295,7 @@ with torizon_io_api.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **fleet_id** | **str**|  | 
+ **fleet_id** | **UUID**|  | 
  **var_from** | **int**|  | 
  **to** | **int**|  | 
  **metric** | [**List[str]**](str.md)|  | [optional] 
@@ -325,7 +325,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_device_data_metric_names**
-> PaginationResultString get_device_data_metric_names(var_from=var_from, to=to)
+> PaginationResultJavaLangString get_device_data_metric_names(var_from=var_from, to=to)
 
 Get the list of metrics available in your repository
 
@@ -347,7 +347,7 @@ This will return the list of metrics reported by devices in your repository duri
 
 ```python
 import torizon_io_api
-from torizon_io_api.models.pagination_result_string import PaginationResultString
+from torizon_io_api.models.pagination_result_java_lang_string import PaginationResultJavaLangString
 from torizon_io_api.rest import ApiException
 from pprint import pprint
 
@@ -395,7 +395,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PaginationResultString**](PaginationResultString.md)
+[**PaginationResultJavaLangString**](PaginationResultJavaLangString.md)
 
 ### Authorization
 
@@ -464,7 +464,7 @@ configuration = torizon_io_api.Configuration(
 with torizon_io_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = torizon_io_api.DeviceMetricsApi(api_client)
-    fleet_id = 'fleet_id_example' # str | 
+    fleet_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     fleet_metrics_outliers_request = torizon_io_api.FleetMetricsOutliersRequest() # FleetMetricsOutliersRequest | 
 
     try:
@@ -483,7 +483,7 @@ with torizon_io_api.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **fleet_id** | **str**|  | 
+ **fleet_id** | **UUID**|  | 
  **fleet_metrics_outliers_request** | [**FleetMetricsOutliersRequest**](FleetMetricsOutliersRequest.md)|  | 
 
 ### Return type
@@ -560,7 +560,7 @@ configuration = torizon_io_api.Configuration(
 with torizon_io_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = torizon_io_api.DeviceMetricsApi(api_client)
-    fleet_id = 'fleet_id_example' # str | 
+    fleet_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     detailed_metric_query = torizon_io_api.DetailedMetricQuery() # DetailedMetricQuery | 
 
     try:
@@ -579,7 +579,7 @@ with torizon_io_api.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **fleet_id** | **str**|  | 
+ **fleet_id** | **UUID**|  | 
  **detailed_metric_query** | [**DetailedMetricQuery**](DetailedMetricQuery.md)|  | 
 
 ### Return type

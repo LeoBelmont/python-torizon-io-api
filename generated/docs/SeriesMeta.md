@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **aggregation** | [**TimeAggregation**](TimeAggregation.md) |  | 
-**device_ids** | **List[str]** |  | [optional] 
+**device_ids** | **List[UUID]** |  | [optional] 
 
 ## Example
 

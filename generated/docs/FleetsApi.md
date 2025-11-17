@@ -52,7 +52,7 @@ configuration = torizon_io_api.Configuration(
 with torizon_io_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = torizon_io_api.FleetsApi(api_client)
-    fleet_id = 'fleet_id_example' # str | 
+    fleet_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Delete a fleet
@@ -68,7 +68,7 @@ with torizon_io_api.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **fleet_id** | **str**|  | 
+ **fleet_id** | **UUID**|  | 
 
 ### Return type
 
@@ -133,8 +133,8 @@ configuration = torizon_io_api.Configuration(
 with torizon_io_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = torizon_io_api.FleetsApi(api_client)
-    fleet_id = 'fleet_id_example' # str | 
-    request_body = ['request_body_example'] # List[str] |  (optional)
+    fleet_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    request_body = None # List[UUID] |  (optional)
 
     try:
         # Remove devices from a fleet
@@ -150,8 +150,8 @@ with torizon_io_api.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **fleet_id** | **str**|  | 
- **request_body** | [**List[str]**](str.md)|  | [optional] 
+ **fleet_id** | **UUID**|  | 
+ **request_body** | [**List[UUID]**](UUID.md)|  | [optional] 
 
 ### Return type
 
@@ -178,7 +178,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_fleets**
-> PaginationResultFleet get_fleets(offset=offset, limit=limit)
+> PaginationResultComToradexApiGwDataFleet get_fleets(offset=offset, limit=limit)
 
 Get information about all fleets in your repository
 
@@ -192,7 +192,7 @@ Returns a list of fleets along with their UUIDs.
 
 ```python
 import torizon_io_api
-from torizon_io_api.models.pagination_result_fleet import PaginationResultFleet
+from torizon_io_api.models.pagination_result_com_toradex_api_gw_data_fleet import PaginationResultComToradexApiGwDataFleet
 from torizon_io_api.rest import ApiException
 from pprint import pprint
 
@@ -240,7 +240,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PaginationResultFleet**](PaginationResultFleet.md)
+[**PaginationResultComToradexApiGwDataFleet**](PaginationResultComToradexApiGwDataFleet.md)
 
 ### Authorization
 
@@ -299,7 +299,7 @@ configuration = torizon_io_api.Configuration(
 with torizon_io_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = torizon_io_api.FleetsApi(api_client)
-    fleet_id = 'fleet_id_example' # str | 
+    fleet_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Get information about a single fleet in your repository
@@ -317,7 +317,7 @@ with torizon_io_api.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **fleet_id** | **str**|  | 
+ **fleet_id** | **UUID**|  | 
 
 ### Return type
 
@@ -343,7 +343,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_fleets_fleetid_devices**
-> PaginationResultDeviceInfoBasic get_fleets_fleetid_devices(fleet_id, offset=offset, limit=limit)
+> PaginationResultComToradexApiGwDataDeviceInfoBasic get_fleets_fleetid_devices(fleet_id, offset=offset, limit=limit)
 
 Get information about the devices in a single fleet
 
@@ -358,7 +358,7 @@ the [GET /devices](#/Devices/getDevices) endpoint.
 
 ```python
 import torizon_io_api
-from torizon_io_api.models.pagination_result_device_info_basic import PaginationResultDeviceInfoBasic
+from torizon_io_api.models.pagination_result_com_toradex_api_gw_data_device_info_basic import PaginationResultComToradexApiGwDataDeviceInfoBasic
 from torizon_io_api.rest import ApiException
 from pprint import pprint
 
@@ -382,7 +382,7 @@ configuration = torizon_io_api.Configuration(
 with torizon_io_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = torizon_io_api.FleetsApi(api_client)
-    fleet_id = 'fleet_id_example' # str | 
+    fleet_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     offset = 56 # int |  (optional)
     limit = 56 # int |  (optional)
 
@@ -402,13 +402,13 @@ with torizon_io_api.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **fleet_id** | **str**|  | 
+ **fleet_id** | **UUID**|  | 
  **offset** | **int**|  | [optional] 
  **limit** | **int**|  | [optional] 
 
 ### Return type
 
-[**PaginationResultDeviceInfoBasic**](PaginationResultDeviceInfoBasic.md)
+[**PaginationResultComToradexApiGwDataDeviceInfoBasic**](PaginationResultComToradexApiGwDataDeviceInfoBasic.md)
 
 ### Authorization
 
@@ -430,7 +430,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_fleets**
-> str post_fleets(create_fleet)
+> UUID post_fleets(create_fleet)
 
 Create a new fleet
 
@@ -495,7 +495,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**str**
+**UUID**
 
 ### Authorization
 
@@ -556,8 +556,8 @@ configuration = torizon_io_api.Configuration(
 with torizon_io_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = torizon_io_api.FleetsApi(api_client)
-    fleet_id = 'fleet_id_example' # str | 
-    request_body = ['request_body_example'] # List[str] |  (optional)
+    fleet_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    request_body = None # List[UUID] |  (optional)
 
     try:
         # Add devices to a fleet
@@ -573,8 +573,8 @@ with torizon_io_api.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **fleet_id** | **str**|  | 
- **request_body** | [**List[str]**](str.md)|  | [optional] 
+ **fleet_id** | **UUID**|  | 
+ **request_body** | [**List[UUID]**](UUID.md)|  | [optional] 
 
 ### Return type
 
@@ -639,7 +639,7 @@ configuration = torizon_io_api.Configuration(
 with torizon_io_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = torizon_io_api.FleetsApi(api_client)
-    fleet_id = 'fleet_id_example' # str | 
+    fleet_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     update_fleet = torizon_io_api.UpdateFleet() # UpdateFleet | 
 
     try:
@@ -656,7 +656,7 @@ with torizon_io_api.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **fleet_id** | **str**|  | 
+ **fleet_id** | **UUID**|  | 
  **update_fleet** | [**UpdateFleet**](UpdateFleet.md)|  | 
 
 ### Return type

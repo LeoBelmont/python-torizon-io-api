@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**device_id** | **str** |  | 
+**device_id** | **UUID** |  | 
 **value** | **float** |  | [optional] 
 **observed_at** | **datetime** |  | 
 

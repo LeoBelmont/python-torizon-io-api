@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-    Torizon OTA v2beta API
+    Torizon OTA
 
      This API is rate limited and will return the following headers for each API call.    - X-RateLimit-Limit - The total number of requests allowed within a time period   - X-RateLimit-Remaining - The total number of requests still allowed until the end of the rate limiting period   - X-RateLimit-Reset - The number of seconds until the limit is fully reset  In addition, if an API client is rate limited, it will receive a HTTP 420 response with the following header:     - Retry-After - The number of seconds to wait until this request is allowed  
 
@@ -17,23 +17,21 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from datetime import datetime
-from pydantic import Field, StrictBool, StrictBytes, StrictInt, StrictStr, field_validator
+from pydantic import StrictBool, StrictBytes, StrictInt, StrictStr
 from typing import List, Optional, Tuple, Union
-from typing_extensions import Annotated
 from torizon_io_api.models.device_create_req import DeviceCreateReq
 from torizon_io_api.models.device_info_extended import DeviceInfoExtended
 from torizon_io_api.models.device_name_request import DeviceNameRequest
 from torizon_io_api.models.device_notes_request import DeviceNotesRequest
 from torizon_io_api.models.device_packages import DevicePackages
-from torizon_io_api.models.device_packages_search_params import DevicePackagesSearchParams
 from torizon_io_api.models.device_sort import DeviceSort
 from torizon_io_api.models.device_sort_direction import DeviceSortDirection
 from torizon_io_api.models.device_status import DeviceStatus
 from torizon_io_api.models.ecu_info_response import EcuInfoResponse
 from torizon_io_api.models.network_info import NetworkInfo
-from torizon_io_api.models.pagination_result_device_info_basic import PaginationResultDeviceInfoBasic
-from torizon_io_api.models.pagination_result_device_packages import PaginationResultDevicePackages
-from torizon_io_api.models.pagination_result_network_info import PaginationResultNetworkInfo
+from torizon_io_api.models.pagination_result_com_toradex_api_gw_data_device_info_basic import PaginationResultComToradexApiGwDataDeviceInfoBasic
+from torizon_io_api.models.pagination_result_com_toradex_api_gw_data_device_packages import PaginationResultComToradexApiGwDataDevicePackages
+from torizon_io_api.models.pagination_result_com_toradex_api_gw_data_network_info import PaginationResultComToradexApiGwDataNetworkInfo
 from torizon_io_api.models.provision_info import ProvisionInfo
 from torizon_io_api.models.queue_response import QueueResponse
 from torizon_io_api.models.update_hibernation_status_request import UpdateHibernationStatusRequest
@@ -340,7 +338,6 @@ class DevicesApi:
         created_at_start: Optional[datetime] = None,
         created_at_end: Optional[datetime] = None,
         hardware_ids: Optional[List[StrictStr]] = None,
-        tags: Optional[List[Annotated[str, Field(strict=True)]]] = None,
         sort_by: Optional[DeviceSort] = None,
         sort_direction: Optional[DeviceSortDirection] = None,
         _request_timeout: Union[
@@ -355,10 +352,10 @@ class DevicesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> PaginationResultDeviceInfoBasic:
+    ) -> PaginationResultComToradexApiGwDataDeviceInfoBasic:
         """Query device information
 
-         Retrieves a list of devices in your repository. This endpoint has two different modes of operation.  * You can specify `deviceId`s and/or `deviceUuid`s any number of times as query parameters, and all devices matching those ids will be returned. * You can specify a number of different filter parameters, and only devices matching all of the filter parameters you specify will be returned. Available filter parameters:     * `nameContains`     * `hibernated`     * `status`     * `activatedAfter`     * `activatedBefore`     * `lastSeenStart`     * `lastSeenEnd`     * `createdAtStart`     * `createdAtEnd`     * `tags`      When specifying `tags`, you cannot specify any other filter parameter. `tags` must have the format `<tagid>=<tag value>`         
+         Retrieves a list of devices in your repository. This endpoint has two different modes of operation.   * You can specify `deviceId`s and/or `deviceUuid`s any number of times as query parameters, and all devices matching those ids will be returned. * You can specify a number of different filter parameters, and only devices matching all of the filter parameters you specify will be returned. Available filter parameters:     * `nameContains`     * `hibernated`     * `status`     * `activatedAfter`     * `activatedBefore`     * `lastSeenStart`     * `lastSeenEnd`     * `createdAtStart`     * `createdAtEnd`         
 
         :param offset:
         :type offset: int
@@ -388,8 +385,6 @@ class DevicesApi:
         :type created_at_end: datetime
         :param hardware_ids:
         :type hardware_ids: List[str]
-        :param tags:
-        :type tags: List[str]
         :param sort_by:
         :type sort_by: DeviceSort
         :param sort_direction:
@@ -431,7 +426,6 @@ class DevicesApi:
             created_at_start=created_at_start,
             created_at_end=created_at_end,
             hardware_ids=hardware_ids,
-            tags=tags,
             sort_by=sort_by,
             sort_direction=sort_direction,
             _request_auth=_request_auth,
@@ -441,7 +435,7 @@ class DevicesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PaginationResultDeviceInfoBasic",
+            '200': "PaginationResultComToradexApiGwDataDeviceInfoBasic",
             '400': "BadRequestRepr",
         }
         response_data = self.api_client.call_api(
@@ -472,7 +466,6 @@ class DevicesApi:
         created_at_start: Optional[datetime] = None,
         created_at_end: Optional[datetime] = None,
         hardware_ids: Optional[List[StrictStr]] = None,
-        tags: Optional[List[Annotated[str, Field(strict=True)]]] = None,
         sort_by: Optional[DeviceSort] = None,
         sort_direction: Optional[DeviceSortDirection] = None,
         _request_timeout: Union[
@@ -487,10 +480,10 @@ class DevicesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[PaginationResultDeviceInfoBasic]:
+    ) -> ApiResponse[PaginationResultComToradexApiGwDataDeviceInfoBasic]:
         """Query device information
 
-         Retrieves a list of devices in your repository. This endpoint has two different modes of operation.  * You can specify `deviceId`s and/or `deviceUuid`s any number of times as query parameters, and all devices matching those ids will be returned. * You can specify a number of different filter parameters, and only devices matching all of the filter parameters you specify will be returned. Available filter parameters:     * `nameContains`     * `hibernated`     * `status`     * `activatedAfter`     * `activatedBefore`     * `lastSeenStart`     * `lastSeenEnd`     * `createdAtStart`     * `createdAtEnd`     * `tags`      When specifying `tags`, you cannot specify any other filter parameter. `tags` must have the format `<tagid>=<tag value>`         
+         Retrieves a list of devices in your repository. This endpoint has two different modes of operation.   * You can specify `deviceId`s and/or `deviceUuid`s any number of times as query parameters, and all devices matching those ids will be returned. * You can specify a number of different filter parameters, and only devices matching all of the filter parameters you specify will be returned. Available filter parameters:     * `nameContains`     * `hibernated`     * `status`     * `activatedAfter`     * `activatedBefore`     * `lastSeenStart`     * `lastSeenEnd`     * `createdAtStart`     * `createdAtEnd`         
 
         :param offset:
         :type offset: int
@@ -520,8 +513,6 @@ class DevicesApi:
         :type created_at_end: datetime
         :param hardware_ids:
         :type hardware_ids: List[str]
-        :param tags:
-        :type tags: List[str]
         :param sort_by:
         :type sort_by: DeviceSort
         :param sort_direction:
@@ -563,7 +554,6 @@ class DevicesApi:
             created_at_start=created_at_start,
             created_at_end=created_at_end,
             hardware_ids=hardware_ids,
-            tags=tags,
             sort_by=sort_by,
             sort_direction=sort_direction,
             _request_auth=_request_auth,
@@ -573,7 +563,7 @@ class DevicesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PaginationResultDeviceInfoBasic",
+            '200': "PaginationResultComToradexApiGwDataDeviceInfoBasic",
             '400': "BadRequestRepr",
         }
         response_data = self.api_client.call_api(
@@ -604,7 +594,6 @@ class DevicesApi:
         created_at_start: Optional[datetime] = None,
         created_at_end: Optional[datetime] = None,
         hardware_ids: Optional[List[StrictStr]] = None,
-        tags: Optional[List[Annotated[str, Field(strict=True)]]] = None,
         sort_by: Optional[DeviceSort] = None,
         sort_direction: Optional[DeviceSortDirection] = None,
         _request_timeout: Union[
@@ -622,7 +611,7 @@ class DevicesApi:
     ) -> RESTResponseType:
         """Query device information
 
-         Retrieves a list of devices in your repository. This endpoint has two different modes of operation.  * You can specify `deviceId`s and/or `deviceUuid`s any number of times as query parameters, and all devices matching those ids will be returned. * You can specify a number of different filter parameters, and only devices matching all of the filter parameters you specify will be returned. Available filter parameters:     * `nameContains`     * `hibernated`     * `status`     * `activatedAfter`     * `activatedBefore`     * `lastSeenStart`     * `lastSeenEnd`     * `createdAtStart`     * `createdAtEnd`     * `tags`      When specifying `tags`, you cannot specify any other filter parameter. `tags` must have the format `<tagid>=<tag value>`         
+         Retrieves a list of devices in your repository. This endpoint has two different modes of operation.   * You can specify `deviceId`s and/or `deviceUuid`s any number of times as query parameters, and all devices matching those ids will be returned. * You can specify a number of different filter parameters, and only devices matching all of the filter parameters you specify will be returned. Available filter parameters:     * `nameContains`     * `hibernated`     * `status`     * `activatedAfter`     * `activatedBefore`     * `lastSeenStart`     * `lastSeenEnd`     * `createdAtStart`     * `createdAtEnd`         
 
         :param offset:
         :type offset: int
@@ -652,8 +641,6 @@ class DevicesApi:
         :type created_at_end: datetime
         :param hardware_ids:
         :type hardware_ids: List[str]
-        :param tags:
-        :type tags: List[str]
         :param sort_by:
         :type sort_by: DeviceSort
         :param sort_direction:
@@ -695,7 +682,6 @@ class DevicesApi:
             created_at_start=created_at_start,
             created_at_end=created_at_end,
             hardware_ids=hardware_ids,
-            tags=tags,
             sort_by=sort_by,
             sort_direction=sort_direction,
             _request_auth=_request_auth,
@@ -705,7 +691,7 @@ class DevicesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PaginationResultDeviceInfoBasic",
+            '200': "PaginationResultComToradexApiGwDataDeviceInfoBasic",
             '400': "BadRequestRepr",
         }
         response_data = self.api_client.call_api(
@@ -731,7 +717,6 @@ class DevicesApi:
         created_at_start,
         created_at_end,
         hardware_ids,
-        tags,
         sort_by,
         sort_direction,
         _request_auth,
@@ -746,7 +731,6 @@ class DevicesApi:
             'deviceUuid': 'multi',
             'deviceId': 'multi',
             'hardwareIds': 'multi',
-            'tags': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -869,10 +853,6 @@ class DevicesApi:
         if hardware_ids is not None:
             
             _query_params.append(('hardwareIds', hardware_ids))
-            
-        if tags is not None:
-            
-            _query_params.append(('tags', tags))
             
         if sort_by is not None:
             
@@ -1471,7 +1451,7 @@ class DevicesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> PaginationResultNetworkInfo:
+    ) -> PaginationResultComToradexApiGwDataNetworkInfo:
         """Get network information for many devices
 
          Retrieves network information (local IP address, MAC, hostname) for multiple devices. A list of devices can be specified as a query parameter; if no devices are specified will return information for all devices in the repository.         
@@ -1515,7 +1495,7 @@ class DevicesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PaginationResultNetworkInfo",
+            '200': "PaginationResultComToradexApiGwDataNetworkInfo",
             '400': "BadRequestRepr",
         }
         response_data = self.api_client.call_api(
@@ -1547,7 +1527,7 @@ class DevicesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[PaginationResultNetworkInfo]:
+    ) -> ApiResponse[PaginationResultComToradexApiGwDataNetworkInfo]:
         """Get network information for many devices
 
          Retrieves network information (local IP address, MAC, hostname) for multiple devices. A list of devices can be specified as a query parameter; if no devices are specified will return information for all devices in the repository.         
@@ -1591,7 +1571,7 @@ class DevicesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PaginationResultNetworkInfo",
+            '200': "PaginationResultComToradexApiGwDataNetworkInfo",
             '400': "BadRequestRepr",
         }
         response_data = self.api_client.call_api(
@@ -1667,7 +1647,7 @@ class DevicesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PaginationResultNetworkInfo",
+            '200': "PaginationResultComToradexApiGwDataNetworkInfo",
             '400': "BadRequestRepr",
         }
         response_data = self.api_client.call_api(
@@ -2307,7 +2287,7 @@ class DevicesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> PaginationResultDevicePackages:
+    ) -> PaginationResultComToradexApiGwDataDevicePackages:
         """Get information about the installed packages for many devices
 
          Returns a list of devices and the packages those devices have installed. A list of devices can be specified as a query parameter; if no devices are specified will return information for all devices in the repository.         
@@ -2354,7 +2334,7 @@ class DevicesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PaginationResultDevicePackages",
+            '200': "PaginationResultComToradexApiGwDataDevicePackages",
             '400': "BadRequestRepr",
             '404': "NotFoundRepr",
             '416': "RangeNotSatisfiableRepr",
@@ -2389,7 +2369,7 @@ class DevicesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[PaginationResultDevicePackages]:
+    ) -> ApiResponse[PaginationResultComToradexApiGwDataDevicePackages]:
         """Get information about the installed packages for many devices
 
          Returns a list of devices and the packages those devices have installed. A list of devices can be specified as a query parameter; if no devices are specified will return information for all devices in the repository.         
@@ -2436,7 +2416,7 @@ class DevicesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PaginationResultDevicePackages",
+            '200': "PaginationResultComToradexApiGwDataDevicePackages",
             '400': "BadRequestRepr",
             '404': "NotFoundRepr",
             '416': "RangeNotSatisfiableRepr",
@@ -2518,7 +2498,7 @@ class DevicesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PaginationResultDevicePackages",
+            '200': "PaginationResultComToradexApiGwDataDevicePackages",
             '400': "BadRequestRepr",
             '404': "NotFoundRepr",
             '416': "RangeNotSatisfiableRepr",
@@ -3931,323 +3911,6 @@ class DevicesApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/devices',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def post_devices_packages(
-        self,
-        offset: Optional[StrictInt] = None,
-        limit: Optional[StrictInt] = None,
-        device_packages_search_params: Optional[DevicePackagesSearchParams] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> PaginationResultDevicePackages:
-        """Get information about the installed packages for many devices
-
-         Returns a list of devices and the packages those devices have installed. A list of devices can be specified using the request body; if no devices are specified will return information for all devices in the repository.  The number of provided deviceUuids in the request body is limited to 100         
-
-        :param offset:
-        :type offset: int
-        :param limit:
-        :type limit: int
-        :param device_packages_search_params:
-        :type device_packages_search_params: DevicePackagesSearchParams
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._post_devices_packages_serialize(
-            offset=offset,
-            limit=limit,
-            device_packages_search_params=device_packages_search_params,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PaginationResultDevicePackages",
-            '400': "BadRequestRepr",
-            '404': "NotFoundRepr",
-            '416': "RangeNotSatisfiableRepr",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def post_devices_packages_with_http_info(
-        self,
-        offset: Optional[StrictInt] = None,
-        limit: Optional[StrictInt] = None,
-        device_packages_search_params: Optional[DevicePackagesSearchParams] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[PaginationResultDevicePackages]:
-        """Get information about the installed packages for many devices
-
-         Returns a list of devices and the packages those devices have installed. A list of devices can be specified using the request body; if no devices are specified will return information for all devices in the repository.  The number of provided deviceUuids in the request body is limited to 100         
-
-        :param offset:
-        :type offset: int
-        :param limit:
-        :type limit: int
-        :param device_packages_search_params:
-        :type device_packages_search_params: DevicePackagesSearchParams
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._post_devices_packages_serialize(
-            offset=offset,
-            limit=limit,
-            device_packages_search_params=device_packages_search_params,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PaginationResultDevicePackages",
-            '400': "BadRequestRepr",
-            '404': "NotFoundRepr",
-            '416': "RangeNotSatisfiableRepr",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def post_devices_packages_without_preload_content(
-        self,
-        offset: Optional[StrictInt] = None,
-        limit: Optional[StrictInt] = None,
-        device_packages_search_params: Optional[DevicePackagesSearchParams] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Get information about the installed packages for many devices
-
-         Returns a list of devices and the packages those devices have installed. A list of devices can be specified using the request body; if no devices are specified will return information for all devices in the repository.  The number of provided deviceUuids in the request body is limited to 100         
-
-        :param offset:
-        :type offset: int
-        :param limit:
-        :type limit: int
-        :param device_packages_search_params:
-        :type device_packages_search_params: DevicePackagesSearchParams
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._post_devices_packages_serialize(
-            offset=offset,
-            limit=limit,
-            device_packages_search_params=device_packages_search_params,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PaginationResultDevicePackages",
-            '400': "BadRequestRepr",
-            '404': "NotFoundRepr",
-            '416': "RangeNotSatisfiableRepr",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _post_devices_packages_serialize(
-        self,
-        offset,
-        limit,
-        device_packages_search_params,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        if offset is not None:
-            
-            _query_params.append(('offset', offset))
-            
-        if limit is not None:
-            
-            _query_params.append(('limit', limit))
-            
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-        if device_packages_search_params is not None:
-            _body_params = device_packages_search_params
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'BearerAuth'
-        ]
-
-        return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/devices/packages',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

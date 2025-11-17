@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**device_id** | **str** |  | 
+**device_id** | **UUID** |  | 
 **session** | [**DeviceSession**](DeviceSession.md) |  | 
 
 ## Example

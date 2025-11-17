@@ -562,7 +562,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_remote_access_user_sessions**
-> PaginationResultUserSession get_remote_access_user_sessions(offset=offset, limit=limit)
+> List[UserSession] get_remote_access_user_sessions()
 
 Fetch all sessions (and their related deviceId) for a user
 
@@ -575,7 +575,7 @@ Fetch all sessions (and their related deviceId) for a user
 
 ```python
 import torizon_io_api
-from torizon_io_api.models.pagination_result_user_session import PaginationResultUserSession
+from torizon_io_api.models.user_session import UserSession
 from torizon_io_api.rest import ApiException
 from pprint import pprint
 
@@ -599,12 +599,10 @@ configuration = torizon_io_api.Configuration(
 with torizon_io_api.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = torizon_io_api.RemoteAccessApi(api_client)
-    offset = 56 # int |  (optional)
-    limit = 56 # int |  (optional)
 
     try:
         # Fetch all sessions (and their related deviceId) for a user
-        api_response = api_instance.get_remote_access_user_sessions(offset=offset, limit=limit)
+        api_response = api_instance.get_remote_access_user_sessions()
         print("The response of RemoteAccessApi->get_remote_access_user_sessions:\n")
         pprint(api_response)
     except Exception as e:
@@ -615,15 +613,11 @@ with torizon_io_api.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **offset** | **int**|  | [optional] 
- **limit** | **int**|  | [optional] 
+This endpoint does not need any parameter.
 
 ### Return type
 
-[**PaginationResultUserSession**](PaginationResultUserSession.md)
+[**List[UserSession]**](UserSession.md)
 
 ### Authorization
 
@@ -632,14 +626,13 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json, text/plain
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** |  |  -  |
-**400** | Invalid value for: query parameter offset, Invalid value for: query parameter limit |  -  |
 **404** | Resource Not Found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

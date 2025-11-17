@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-    Torizon OTA v2beta API
+    Torizon OTA
 
      This API is rate limited and will return the following headers for each API call.    - X-RateLimit-Limit - The total number of requests allowed within a time period   - X-RateLimit-Remaining - The total number of requests still allowed until the end of the rate limiting period   - X-RateLimit-Reset - The number of seconds until the limit is fully reset  In addition, if an API client is rate limited, it will receive a HTTP 420 response with the following header:     - Retry-After - The number of seconds to wait until this request is allowed  
 
@@ -169,8 +169,11 @@ class ApiException(OpenApiException):
             error_message += "HTTP response headers: {0}\n".format(
                 self.headers)
 
-        if self.data or self.body:
-            error_message += "HTTP response body: {0}\n".format(self.data or self.body)
+        if self.body:
+            error_message += "HTTP response body: {0}\n".format(self.body)
+
+        if self.data:
+            error_message += "HTTP response data: {0}\n".format(self.data)
 
         return error_message
 

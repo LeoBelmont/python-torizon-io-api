@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **device_name** | **str** |  | [optional] 
 **device_id** | **str** |  | 
 **hibernated** | **bool** |  | [optional] 
-**fleet_ids** | **List[str]** |  | [optional] 
+**fleet_ids** | **List[UUID]** |  | [optional] 
 
 ## Example
 

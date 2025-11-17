@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-    Torizon OTA v2beta API
+    Torizon OTA
 
      This API is rate limited and will return the following headers for each API call.    - X-RateLimit-Limit - The total number of requests allowed within a time period   - X-RateLimit-Remaining - The total number of requests still allowed until the end of the rate limiting period   - X-RateLimit-Reset - The number of seconds until the limit is fully reset  In addition, if an API client is rate limited, it will receive a HTTP 420 response with the following header:     - Retry-After - The number of seconds to wait until this request is allowed  
 
@@ -21,8 +21,8 @@ from typing import List, Optional
 from uuid import UUID
 from torizon_io_api.models.create_fleet import CreateFleet
 from torizon_io_api.models.fleet import Fleet
-from torizon_io_api.models.pagination_result_device_info_basic import PaginationResultDeviceInfoBasic
-from torizon_io_api.models.pagination_result_fleet import PaginationResultFleet
+from torizon_io_api.models.pagination_result_com_toradex_api_gw_data_device_info_basic import PaginationResultComToradexApiGwDataDeviceInfoBasic
+from torizon_io_api.models.pagination_result_com_toradex_api_gw_data_fleet import PaginationResultComToradexApiGwDataFleet
 from torizon_io_api.models.update_fleet import UpdateFleet
 
 from torizon_io_api.api_client import ApiClient, RequestSerialized
@@ -65,7 +65,7 @@ class FleetsApi:
          Permanently delete a fleet. Devices in the fleet are not deleted, but are no longer associated with the deleted fleet.         
 
         :param fleet_id: (required)
-        :type fleet_id: str
+        :type fleet_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -134,7 +134,7 @@ class FleetsApi:
          Permanently delete a fleet. Devices in the fleet are not deleted, but are no longer associated with the deleted fleet.         
 
         :param fleet_id: (required)
-        :type fleet_id: str
+        :type fleet_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -203,7 +203,7 @@ class FleetsApi:
          Permanently delete a fleet. Devices in the fleet are not deleted, but are no longer associated with the deleted fleet.         
 
         :param fleet_id: (required)
-        :type fleet_id: str
+        :type fleet_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -333,9 +333,9 @@ class FleetsApi:
          Removes devices, specified by a list of device UUIDs in the body, from a specific fleet.  Note: only applicable to static fleets.         
 
         :param fleet_id: (required)
-        :type fleet_id: str
+        :type fleet_id: UUID
         :param request_body:
-        :type request_body: List[str]
+        :type request_body: List[UUID]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -407,9 +407,9 @@ class FleetsApi:
          Removes devices, specified by a list of device UUIDs in the body, from a specific fleet.  Note: only applicable to static fleets.         
 
         :param fleet_id: (required)
-        :type fleet_id: str
+        :type fleet_id: UUID
         :param request_body:
-        :type request_body: List[str]
+        :type request_body: List[UUID]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -481,9 +481,9 @@ class FleetsApi:
          Removes devices, specified by a list of device UUIDs in the body, from a specific fleet.  Note: only applicable to static fleets.         
 
         :param fleet_id: (required)
-        :type fleet_id: str
+        :type fleet_id: UUID
         :param request_body:
-        :type request_body: List[str]
+        :type request_body: List[UUID]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -626,7 +626,7 @@ class FleetsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> PaginationResultFleet:
+    ) -> PaginationResultComToradexApiGwDataFleet:
         """Get information about all fleets in your repository
 
          Returns a list of fleets along with their UUIDs.         
@@ -667,7 +667,7 @@ class FleetsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PaginationResultFleet",
+            '200': "PaginationResultComToradexApiGwDataFleet",
             '400': "BadRequestRepr",
         }
         response_data = self.api_client.call_api(
@@ -698,7 +698,7 @@ class FleetsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[PaginationResultFleet]:
+    ) -> ApiResponse[PaginationResultComToradexApiGwDataFleet]:
         """Get information about all fleets in your repository
 
          Returns a list of fleets along with their UUIDs.         
@@ -739,7 +739,7 @@ class FleetsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PaginationResultFleet",
+            '200': "PaginationResultComToradexApiGwDataFleet",
             '400': "BadRequestRepr",
         }
         response_data = self.api_client.call_api(
@@ -811,7 +811,7 @@ class FleetsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PaginationResultFleet",
+            '200': "PaginationResultComToradexApiGwDataFleet",
             '400': "BadRequestRepr",
         }
         response_data = self.api_client.call_api(
@@ -914,7 +914,7 @@ class FleetsApi:
          Returns fleet info for a single fleet.         
 
         :param fleet_id: (required)
-        :type fleet_id: str
+        :type fleet_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -983,7 +983,7 @@ class FleetsApi:
          Returns fleet info for a single fleet.         
 
         :param fleet_id: (required)
-        :type fleet_id: str
+        :type fleet_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1052,7 +1052,7 @@ class FleetsApi:
          Returns fleet info for a single fleet.         
 
         :param fleet_id: (required)
-        :type fleet_id: str
+        :type fleet_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1177,13 +1177,13 @@ class FleetsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> PaginationResultDeviceInfoBasic:
+    ) -> PaginationResultComToradexApiGwDataDeviceInfoBasic:
         """Get information about the devices in a single fleet
 
          Returns device information for all devices in the specified fleet. The schema for device data is the same as the [GET /devices](#/Devices/getDevices) endpoint.         
 
         :param fleet_id: (required)
-        :type fleet_id: str
+        :type fleet_id: UUID
         :param offset:
         :type offset: int
         :param limit:
@@ -1221,7 +1221,7 @@ class FleetsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PaginationResultDeviceInfoBasic",
+            '200': "PaginationResultComToradexApiGwDataDeviceInfoBasic",
             '400': "BadRequestRepr",
             '404': "NotFoundRepr",
         }
@@ -1254,13 +1254,13 @@ class FleetsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[PaginationResultDeviceInfoBasic]:
+    ) -> ApiResponse[PaginationResultComToradexApiGwDataDeviceInfoBasic]:
         """Get information about the devices in a single fleet
 
          Returns device information for all devices in the specified fleet. The schema for device data is the same as the [GET /devices](#/Devices/getDevices) endpoint.         
 
         :param fleet_id: (required)
-        :type fleet_id: str
+        :type fleet_id: UUID
         :param offset:
         :type offset: int
         :param limit:
@@ -1298,7 +1298,7 @@ class FleetsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PaginationResultDeviceInfoBasic",
+            '200': "PaginationResultComToradexApiGwDataDeviceInfoBasic",
             '400': "BadRequestRepr",
             '404': "NotFoundRepr",
         }
@@ -1337,7 +1337,7 @@ class FleetsApi:
          Returns device information for all devices in the specified fleet. The schema for device data is the same as the [GET /devices](#/Devices/getDevices) endpoint.         
 
         :param fleet_id: (required)
-        :type fleet_id: str
+        :type fleet_id: UUID
         :param offset:
         :type offset: int
         :param limit:
@@ -1375,7 +1375,7 @@ class FleetsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PaginationResultDeviceInfoBasic",
+            '200': "PaginationResultComToradexApiGwDataDeviceInfoBasic",
             '400': "BadRequestRepr",
             '404': "NotFoundRepr",
         }
@@ -1476,7 +1476,7 @@ class FleetsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> str:
+    ) -> UUID:
         """Create a new fleet
 
          Creates a new fleet. You must specify a fleet name and a fleet type, which can be `static` or `dynamic`. Static fleets are the normal way of creating fleets on the Torizon platform. Dynamic fleets have an associated pattern matching expression, and devices that match the pattern are automatically added to the group.  If you are interested in using dynamic groups, please contact support--the expression language is not fully documented yet.         
@@ -1514,7 +1514,7 @@ class FleetsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "str",
+            '201': "UUID",
             '400': "BadRequestRepr",
             '409': "ConflictRepr",
         }
@@ -1545,7 +1545,7 @@ class FleetsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[str]:
+    ) -> ApiResponse[UUID]:
         """Create a new fleet
 
          Creates a new fleet. You must specify a fleet name and a fleet type, which can be `static` or `dynamic`. Static fleets are the normal way of creating fleets on the Torizon platform. Dynamic fleets have an associated pattern matching expression, and devices that match the pattern are automatically added to the group.  If you are interested in using dynamic groups, please contact support--the expression language is not fully documented yet.         
@@ -1583,7 +1583,7 @@ class FleetsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "str",
+            '201': "UUID",
             '400': "BadRequestRepr",
             '409': "ConflictRepr",
         }
@@ -1652,7 +1652,7 @@ class FleetsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "str",
+            '201': "UUID",
             '400': "BadRequestRepr",
             '409': "ConflictRepr",
         }
@@ -1763,9 +1763,9 @@ class FleetsApi:
          Adds devices, specified by a list of device UUIDs in the body, to a specific fleet.  Note: only applicable to static fleets.         
 
         :param fleet_id: (required)
-        :type fleet_id: str
+        :type fleet_id: UUID
         :param request_body:
-        :type request_body: List[str]
+        :type request_body: List[UUID]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1837,9 +1837,9 @@ class FleetsApi:
          Adds devices, specified by a list of device UUIDs in the body, to a specific fleet.  Note: only applicable to static fleets.         
 
         :param fleet_id: (required)
-        :type fleet_id: str
+        :type fleet_id: UUID
         :param request_body:
-        :type request_body: List[str]
+        :type request_body: List[UUID]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1911,9 +1911,9 @@ class FleetsApi:
          Adds devices, specified by a list of device UUIDs in the body, to a specific fleet.  Note: only applicable to static fleets.         
 
         :param fleet_id: (required)
-        :type fleet_id: str
+        :type fleet_id: UUID
         :param request_body:
-        :type request_body: List[str]
+        :type request_body: List[UUID]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2062,7 +2062,7 @@ class FleetsApi:
          Updates fleet information.         
 
         :param fleet_id: (required)
-        :type fleet_id: str
+        :type fleet_id: UUID
         :param update_fleet: (required)
         :type update_fleet: UpdateFleet
         :param _request_timeout: timeout setting for this request. If one
@@ -2134,7 +2134,7 @@ class FleetsApi:
          Updates fleet information.         
 
         :param fleet_id: (required)
-        :type fleet_id: str
+        :type fleet_id: UUID
         :param update_fleet: (required)
         :type update_fleet: UpdateFleet
         :param _request_timeout: timeout setting for this request. If one
@@ -2206,7 +2206,7 @@ class FleetsApi:
          Updates fleet information.         
 
         :param fleet_id: (required)
-        :type fleet_id: str
+        :type fleet_id: UUID
         :param update_fleet: (required)
         :type update_fleet: UpdateFleet
         :param _request_timeout: timeout setting for this request. If one

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**device_uuid** | **str** |  | 
+**device_uuid** | **UUID** |  | 
 **device_id** | **str** |  | 
 **name** | **str** |  | 
 

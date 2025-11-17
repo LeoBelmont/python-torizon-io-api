@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**device_id** | **str** |  | 
+**device_id** | **UUID** |  | 
 **last_api_connect** | **datetime** |  | [optional] 
 **last_ssh_session_connect** | [**LastSshSession**](LastSshSession.md) |  | [optional] 
 **last_version** | **str** |  | [optional] 

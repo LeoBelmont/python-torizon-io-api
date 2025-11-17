@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**device_uuid** | **str** |  | 
+**device_uuid** | **UUID** |  | 
 **local_ip_v4** | **str** |  | [optional] 
 **hostname** | **str** |  | [optional] 
 **mac_address** | **str** |  | [optional] 
