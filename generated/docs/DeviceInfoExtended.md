@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **last_updated** | **datetime** |  | [optional] 
 **device_fleets** | [**List[Fleet]**](Fleet.md) |  | [optional] 
 **device_packages** | [**List[InstalledPackage]**](InstalledPackage.md) |  | [optional] 
-**device_tags** | **List[List[object]]** |  | [optional] 
+**tags** | **Dict[str, str]** |  | 
 **network_info** | [**NetworkInfo**](NetworkInfo.md) |  | 
 
 ## Example

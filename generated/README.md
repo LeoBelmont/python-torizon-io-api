@@ -129,6 +129,7 @@ Class | Method | HTTP request | Description
 *DevicesApi* | [**get_devices_uptane_deviceuuid_assignment**](docs/DevicesApi.md#get_devices_uptane_deviceuuid_assignment) | **GET** /devices/uptane/{deviceUuid}/assignment | Show detailed information about the currently-assigned update for a single device
 *DevicesApi* | [**get_devices_uptane_deviceuuid_components**](docs/DevicesApi.md#get_devices_uptane_deviceuuid_components) | **GET** /devices/uptane/{deviceUuid}/components | Get a list of the software components reported by a single device
 *DevicesApi* | [**post_devices**](docs/DevicesApi.md#post_devices) | **POST** /devices | Manually create a new device
+*DevicesApi* | [**post_devices_packages**](docs/DevicesApi.md#post_devices_packages) | **POST** /devices/packages | Get information about the installed packages for many devices
 *DevicesApi* | [**put_devices_hibernation_deviceuuid**](docs/DevicesApi.md#put_devices_hibernation_deviceuuid) | **PUT** /devices/hibernation/{deviceUuid} | Set the hibernation status of a device
 *DevicesApi* | [**put_devices_name_deviceuuid**](docs/DevicesApi.md#put_devices_name_deviceuuid) | **PUT** /devices/name/{deviceUuid} | Set the display name of a single device
 *DevicesApi* | [**put_devices_notes_deviceuuid**](docs/DevicesApi.md#put_devices_notes_deviceuuid) | **PUT** /devices/notes/{deviceUuid} | Set the device notes for a specific device
@@ -188,6 +189,7 @@ Class | Method | HTTP request | Description
  - [DeviceNameRequest](docs/DeviceNameRequest.md)
  - [DeviceNotesRequest](docs/DeviceNotesRequest.md)
  - [DevicePackages](docs/DevicePackages.md)
+ - [DevicePackagesSearchParams](docs/DevicePackagesSearchParams.md)
  - [DeviceSession](docs/DeviceSession.md)
  - [DeviceSort](docs/DeviceSort.md)
  - [DeviceSortDirection](docs/DeviceSortDirection.md)
@@ -202,6 +204,7 @@ Class | Method | HTTP request | Description
  - [FleetMetricsOutliersRequest](docs/FleetMetricsOutliersRequest.md)
  - [FleetMetricsOutliersResponse](docs/FleetMetricsOutliersResponse.md)
  - [FleetType](docs/FleetType.md)
+ - [Hashes](docs/Hashes.md)
  - [Image](docs/Image.md)
  - [InstalledPackage](docs/InstalledPackage.md)
  - [IpAddressRequest](docs/IpAddressRequest.md)
@@ -223,6 +226,7 @@ Class | Method | HTTP request | Description
  - [PaginationResultPackage](docs/PaginationResultPackage.md)
  - [PaginationResultString](docs/PaginationResultString.md)
  - [PaginationResultUpdateResponse](docs/PaginationResultUpdateResponse.md)
+ - [PaginationResultUserSession](docs/PaginationResultUserSession.md)
  - [PostUpdates400Response](docs/PostUpdates400Response.md)
  - [ProvisionInfo](docs/ProvisionInfo.md)
  - [PublicKeys](docs/PublicKeys.md)
@@ -242,6 +246,7 @@ Class | Method | HTTP request | Description
  - [UpdateCreateResult](docs/UpdateCreateResult.md)
  - [UpdateFleet](docs/UpdateFleet.md)
  - [UpdateHibernationStatusRequest](docs/UpdateHibernationStatusRequest.md)
+ - [UpdateReportedResult](docs/UpdateReportedResult.md)
  - [UpdateRequest](docs/UpdateRequest.md)
  - [UpdateResponse](docs/UpdateResponse.md)
  - [UpstreamEndpointErrorRepr](docs/UpstreamEndpointErrorRepr.md)

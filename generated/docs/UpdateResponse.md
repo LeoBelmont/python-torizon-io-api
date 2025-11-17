@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **created_at** | **datetime** |  | 
 **scheduled_for** | **datetime** |  | [optional] 
 **completed_at** | **datetime** |  | [optional] 
+**device_result** | [**UpdateReportedResult**](UpdateReportedResult.md) |  | [optional] 
 **packages** | **Dict[str, str]** |  | 
 
 ## Example
