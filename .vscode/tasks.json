@@ -20,6 +20,22 @@
             "group": "build"
         },
         {
+            "label": "pull",
+            "command": "docker",
+            "type": "shell",
+            "args": [
+                "pull",
+                "openapitools/openapi-generator-cli:latest"
+            ],
+            "problemMatcher": [
+                "$tsc"
+            ],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "build"
+        },
+        {
             "label": "generate",
             "command": "docker",
             "type": "shell",
@@ -30,13 +46,13 @@
                 "${workspaceFolder}:/local",
                 "--user",
                 "1000:1000",
-                "openapitools/openapi-generator-cli",
+                "openapitools/openapi-generator-cli:latest",
                 "generate",
                 "-i", "/local/torizon-openapi.yaml",
                 "-g", "python",
                 "-o", "/local/generated",
                 "--additional-properties", "packageName=torizon_io_api",
-                "--additional-properties", "packageVersion=0.0.3",
+                "--additional-properties", "packageVersion=0.0.6",
                 "--additional-properties", "projectName=torizon-io-api"
             ],
             "problemMatcher": [
@@ -47,7 +63,7 @@
             },
             "dependsOrder": "sequence",
             "dependsOn": [
-                "download-spec"
+                "pull"
             ],
             "group": "build"
         },
